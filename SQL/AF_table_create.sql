@@ -5,8 +5,8 @@ CREATE TABLE AF.Asmuo (
 			   		  					GENERATED ALWAYS AS IDENTITY (START WITH 10000),
     Vardas    			VARCHAR(32) 	NOT NULL,
 	Pavarde   			VARCHAR(32) 	NOT NULL,
-	Lytis 	  			VARCHAR(10) 	NOT NULL,
-										CHECK (Lytis IN ('Vyras', 'Moteris')),
+	Lytis 	  			VARCHAR(4) 		NOT NULL,
+										CHECK (Lytis IN ('vyr', 'mot')),
 	Gim_data  			DATE     		NOT NULL CONSTRAINT GimimoMetai 
                             			CHECK(EXTRACT(YEAR FROM Gim_data) > 1920 AND EXTRACT(YEAR FROM Gim_data) < EXTRACT(YEAR FROM CURRENT_DATE) + 1),
 	El_pastas 			CHAR(50),
@@ -36,6 +36,9 @@ CREATE TABLE AF.Vienetas (
     Nr 			 	INTEGER   		NOT NULL PRIMARY KEY 
 			     		   			GENERATED ALWAYS AS IDENTITY,
 	Pavadinimas  	VARCHAR(50)  	NOT NULL,
+	Tipas			VARCHAR(32)		NOT NULL
+									CHECK (Tipas IN ('kuopa', 'korporacija', 'klubas', 'vienetas', 'juridinis asmuo', 'valdomasis'))
+									DEFAULT 'vienetas',
 	Aprasymas 	 	VARCHAR(500),
     Adresas 	 	VARCHAR(50),
 	Ikurimo_data 	DATE 			NOT NULL 
@@ -97,4 +100,6 @@ CREATE TABLE AF.Izodis (
 	CONSTRAINT IRengini FOREIGN KEY (Renginio_nr) REFERENCES AF.Renginys ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-
+-- trigeris kuris patikrina ar pridedant prie renginio asmeni jis egzistuoja
+-- trigeris kuris patikrina ar pridedant prie vieneto asmeni jis egzistuoja
+-- trigeris, kuris sukuria nauja asmeni jei pridedant prie vieneto arba renginio jis neegzistuoja
