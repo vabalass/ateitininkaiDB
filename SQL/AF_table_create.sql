@@ -59,7 +59,7 @@ CREATE TABLE AF.Priklauso_vienetui (
 							GENERATED ALWAYS AS IDENTITY,
     Asmens_nr 	INTEGER 	NOT NULL,
 	Vieneto_nr 	INTEGER 	NOT NULL,
-    Pareigybe 	VARCHAR(32) 	NOT NULL 
+    Pareigybe 	VARCHAR(32) NOT NULL 
 					   		CHECK (Pareigybe IN ('globėjas', 'narys'))
 					   		DEFAULT 'narys',
 	Data_nuo 	DATE 		NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE AF.Dalyvauja_renginyje (
 								GENERATED ALWAYS AS IDENTITY,
     Renginio_nr 	INTEGER 	NOT NULL,
 	Asmens_nr 		INTEGER 	NOT NULL,
-    Pareigybe 		VARCHAR(32) 	NOT NULL 
+    Pareigybe 		VARCHAR(32) NOT NULL 
 					   			CHECK (Pareigybe IN ('dalyvis', 'vadovas', 'svečias', 'programos vadovas', 'vyriausias-vadovas', 'komendantas'))
 					   			DEFAULT 'dalyvis',
 
@@ -84,13 +84,13 @@ CREATE TABLE AF.Dalyvauja_renginyje (
 );
 
 CREATE TABLE AF.Izodis (
-    Nr 				INTEGER 		NOT NULL PRIMARY KEY 
-						    		GENERATED ALWAYS AS IDENTITY,
-    Asmens_nr     	INTEGER 		NOT NULL,
-    Sajunga			VARCHAR(4)		NOT NULL
-									CHECK (Sajunga IN ('JAS', 'MAS', 'SAS', 'ASS')),
-	Izodzio_data 	DATE 			NOT NULL 
-							 		DEFAULT CURRENT_DATE,
+    Nr 				INTEGER 	NOT NULL PRIMARY KEY 
+						    	GENERATED ALWAYS AS IDENTITY,
+    Asmens_nr     	INTEGER 	NOT NULL,
+    Sajunga			VARCHAR(4)	NOT NULL
+								CHECK (Sajunga IN ('JAS', 'MAS', 'SAS', 'ASS')),
+	Izodzio_data 	DATE 		NOT NULL 
+							 	DEFAULT CURRENT_DATE,
 	Renginio_nr 	INTEGER, 		
 	
 	CONSTRAINT IAsmeni FOREIGN KEY (Asmens_nr) REFERENCES AF.Asmuo ON DELETE RESTRICT ON UPDATE RESTRICT,
