@@ -100,7 +100,14 @@ CREATE TABLE AF.Izodis (
 	CONSTRAINT IRengini FOREIGN KEY (Renginio_nr) REFERENCES AF.Renginys ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
+-- Indeksai
+CREATE INDEX idx_Asmuo_Vardas_Pavarde
+ON AF.Asmuo (Vardas, Pavarde);
 
+CREATE INDEX idx_Nario_mokestis_Data
+ON AF.Nario_mokestis (Apmokejimo_data);
+
+-- Views
 CREATE VIEW AF.Asmuo_pilnas AS
 SELECT
     A.Nr,
@@ -131,6 +138,10 @@ SELECT
 FROM
     AF.Asmuo A;
 
+CREATE VIEW AF.Nariai AS
+SELECT * FROM AF.Asmuo_pilnas
+WHERE Narystes_statusas <> '-';
+
 -- trigeris kuris patikrina ar pridedant prie renginio asmeni jis egzistuoja
 -- trigeris kuris patikrina ar pridedant prie vieneto asmeni jis egzistuoja
 
@@ -156,3 +167,23 @@ CREATE TRIGGER before_insert_izodis
 BEFORE INSERT ON AF.Izodis
 FOR EACH ROW
 EXECUTE FUNCTION check_duplicate_izodis();
+
+CREATE MATERIALIZED VIEW MatView_AF_Valdyba AS
+SELECT
+    A.Nr,
+    A.Vardas,
+    A.Pavarde,
+    A.El_pastas,
+    A.Tel_nr,
+    PV.Pareigybe,
+    V.Pavadinimas AS Vieneto_Pavadinimas
+FROM
+    AF.Asmuo A
+JOIN
+    AF.Priklauso_vienetui PV ON A.Nr = PV.Asmens_nr
+JOIN
+    AF.Vienetas V ON PV.Vieneto_nr = V.Nr
+WHERE
+    V.Pavadinimas = 'AF valdyba'
+    AND CURRENT_DATE >= PV.Data_nuo
+    AND CURRENT_DATE <= PV.Data_iki;
