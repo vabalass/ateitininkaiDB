@@ -100,6 +100,59 @@ CREATE TABLE AF.Izodis (
 	CONSTRAINT IRengini FOREIGN KEY (Renginio_nr) REFERENCES AF.Renginys ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
+
+CREATE VIEW AF.Asmuo_pilnas AS
+SELECT
+    A.Nr,
+    A.Vardas,
+    A.Pavarde,
+    A.Lytis,
+    A.Gim_data,
+    EXTRACT(YEAR FROM AGE(A.Gim_data)) AS Amzius,
+    A.El_pastas,
+    A.Tel_nr,
+    A.Aprasymas,
+    A.Krastas,
+    A.Miestas || ', ' || A.Gatve || ' ' || A.Namas || '-' || A.Butas AS Adresas,
+    COALESCE((
+        SELECT I.Sajunga
+        FROM AF.Izodis I
+        WHERE I.Asmens_nr = A.Nr
+        ORDER BY I.Izodzio_data DESC
+        LIMIT 1
+    ), '-') AS Narystes_statusas,
+	A.Registravimo_data,
+	COALESCE((
+        SELECT MAX(R.Data_iki)
+        FROM AF.Dalyvauja_renginyje DR
+        JOIN AF.Renginys R ON DR.Renginio_nr = R.Nr
+        WHERE DR.Asmens_nr = A.Nr
+    ), NULL) AS Paskutinio_renginio_data
+FROM
+    AF.Asmuo A;
+
 -- trigeris kuris patikrina ar pridedant prie renginio asmeni jis egzistuoja
 -- trigeris kuris patikrina ar pridedant prie vieneto asmeni jis egzistuoja
+
 -- trigeris, kuris sukuria nauja asmeni jei pridedant prie vieneto arba renginio jis neegzistuoja
+
+--trigeris, kuris patikrina ar pridedant nauja izodi tas asmuo jau nera daves tos sajungos izodzio
+CREATE OR REPLACE FUNCTION check_duplicate_izodis()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM AF.Izodis
+        WHERE NEW.Asmens_nr = Asmens_nr
+          AND NEW.Sajunga = Sajunga
+    ) THEN
+        RAISE EXCEPTION 'Negalima pridėti antro įžodžio tos pačios sąjungos, tam pačiam asmeniui.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER before_insert_izodis
+BEFORE INSERT ON AF.Izodis
+FOR EACH ROW
+EXECUTE FUNCTION check_duplicate_izodis();
