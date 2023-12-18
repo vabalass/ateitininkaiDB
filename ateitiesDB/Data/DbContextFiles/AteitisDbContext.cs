@@ -19,16 +19,15 @@ namespace ateitiesDB.Data.DbContextFiles
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure your entity relationships and constraints here
-            modelBuilder.Entity<BelongsToUnit>()
+            modelBuilder.Entity<BelongsToGroup>()
                 .HasOne(b => b.Person)
-                .WithMany(p => p.BelongsToUnits)
+                .WithMany(p => p.BelongsToGroups)
                 .HasForeignKey(b => b.PersonId);
 
-            modelBuilder.Entity<BelongsToUnit>()
-                .HasOne(b => b.Unit)
-                .WithMany(u => u.BelongsToUnits)
-                .HasForeignKey(b => b.UnitId);
+            modelBuilder.Entity<BelongsToGroup>()
+                .HasOne(b => b.Group)
+                .WithMany(u => u.BelongsToGroup)
+                .HasForeignKey(b => b.GroupId);
 
             modelBuilder.Entity<ParticipatesInEvent>()
                 .HasOne(p => p.Person)
@@ -37,17 +36,17 @@ namespace ateitiesDB.Data.DbContextFiles
 
             modelBuilder.Entity<ParticipatesInEvent>()
                 .HasOne(p => p.Event)
-                .WithMany(e => e.ParticipatesInEvents)
+                .WithMany(e => e.ParticipatesInEvent)
                 .HasForeignKey(p => p.EventId);
 
-            modelBuilder.Entity<Badge>()
-                .HasOne(b => b.Person)
-                .WithMany(p => p.Badges)
-                .HasForeignKey(b => b.PersonId);
+            modelBuilder.Entity<Pledge>()
+                .HasOne(p => p.Person)
+                .WithMany(person => person.Pledges)
+                .HasForeignKey(p => p.PersonId);
 
-            modelBuilder.Entity<Badge>()
+            modelBuilder.Entity<Pledge>()
                 .HasOne(b => b.Event)
-                .WithMany(e => e.Badges)
+                .WithMany(e => e.Pledges)
                 .HasForeignKey(b => b.EventId);
         }
     }
