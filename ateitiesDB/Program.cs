@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 //Configure PostgreSQL connection
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AteitisDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<AteitininkaiContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AteitisDbContext"))
+    );
 
 // Add services to the container.
 

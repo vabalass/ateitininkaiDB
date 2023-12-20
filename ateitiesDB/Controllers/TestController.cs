@@ -7,17 +7,17 @@ namespace ateitiesDB.Controllers
     [Route("[controller]")]
     public class TestController : Controller
     {
-        private readonly AteitisDbContext _context;
+        private readonly AteitininkaiContext _context;
 
-        public TestController(AteitisDbContext context)
+        public TestController(AteitininkaiContext context)
         {
             _context = context;
         }
 
         [HttpGet("People")]
-        public async ActionResult GetPeople()
+        public ActionResult GetPeople()
         {
-            var people = await _context.People;
+            var people = _context.Asmuos;
 
             return Ok(people);
         }
