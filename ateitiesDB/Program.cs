@@ -1,4 +1,7 @@
+using ateitiesDB.Interfaces;
 using ateitiesDB.Models;
+using ateitiesDB.Repositories;
+using ateitiesDB.Services.DtoConverter;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,8 @@ builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
     );
 
 // Add services to the container.
+builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
+builder.Services.AddScoped<IDtoToModel, DtoToModel>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
