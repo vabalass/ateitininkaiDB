@@ -1,6 +1,6 @@
 ﻿namespace ateitiesDB.Models
 {
-    public class Group
+    public class GroupHM
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -9,6 +9,6 @@
         public string? Address { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public ICollection<BelongsToGroup> BelongsToGroup { get; set;}
+        public ICollection<BelongsToGroupHM> BelongsToGroup { get; set;}
     }
 }

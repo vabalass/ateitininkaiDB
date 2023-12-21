@@ -127,7 +127,7 @@ SELECT
         WHERE I.Asmens_nr = A.Nr
         ORDER BY I.Izodzio_data DESC
         LIMIT 1
-    ), '-') AS Narystes_statusas,
+    ), NULL) AS Narystes_statusas,
 	A.Registravimo_data,
 	COALESCE((
         SELECT MAX(R.Data_iki)
@@ -140,7 +140,7 @@ FROM
 
 CREATE VIEW AF.Nariai AS
 SELECT * FROM AF.Asmuo_pilnas
-WHERE Narystes_statusas <> '-';
+WHERE Narystes_statusas <> NULL;
 
 -- trigeris kuris patikrina ar pridedant prie renginio asmeni jis egzistuoja
 -- trigeris kuris patikrina ar pridedant prie vieneto asmeni jis egzistuoja
@@ -187,3 +187,5 @@ WHERE
     V.Pavadinimas = 'AF valdyba'
     AND CURRENT_DATE >= PV.Data_nuo
     AND CURRENT_DATE <= PV.Data_iki;
+
+    

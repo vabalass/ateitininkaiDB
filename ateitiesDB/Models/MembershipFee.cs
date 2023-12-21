@@ -1,12 +1,17 @@
-﻿namespace ateitiesDB.Models
-{
-    public class MembershipFee
-    {
-        public int PaymentId { get; set; }
-        public int PersonId { get; set; }
-        public decimal Amount { get; set; }
-        public DateTime PaymentDate { get; set; }
+﻿using System;
+using System.Collections.Generic;
 
-        public Person Person { get; set; }
-    }
+namespace ateitiesDB.Models;
+
+public partial class Membershipfee
+{
+    public int Paymentid { get; set; }
+
+    public int Personid { get; set; }
+
+    public decimal Amount { get; set; }
+
+    public DateOnly Paymentdate { get; set; }
+
+    public virtual Person Person { get; set; } = null!;
 }

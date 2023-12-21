@@ -1,6 +1,6 @@
 ﻿namespace ateitiesDB.Models
 {
-    public class BelongsToGroup
+    public class BelongsToGroupHM
     {
         public int Id { get; set; }
         public int PersonId { get; set; }
@@ -9,7 +9,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public Person? Person { get; set; }
-        public Group Group { get; set; }
+        public PersonHM? Person { get; set; }
+        public GroupHM Group { get; set; }
     }
 }

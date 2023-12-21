@@ -1,10 +1,10 @@
-using ateitiesDB.Data.DbContextFiles;
+using ateitiesDB.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Configure PostgreSQL connection
-builder.Services.AddDbContext<AteitininkaiContext>(options =>
+builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AteitisDbContext"))
     );
 
