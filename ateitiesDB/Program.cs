@@ -14,6 +14,7 @@ builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
 // Add services to the container.
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 builder.Services.AddScoped<IDtoToModel, DtoToModel>();
+builder.Services.AddScoped<IUnitsRepository, UnitsRepository>();
 
 // Add MVC services
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();

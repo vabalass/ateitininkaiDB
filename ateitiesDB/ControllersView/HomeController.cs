@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace AteitisManagement.Controllers
+namespace ateitiesDB.ControllersView
 {
     public class HomeController : Controller
     {

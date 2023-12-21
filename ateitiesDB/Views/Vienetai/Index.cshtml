@@ -1,0 +1,38 @@
+﻿@model List<ateitiesDB.Models.Unit>
+@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Pavadinimas</th>
+                <th>Tipas</th>
+                <th>Aprašymas</th>
+                <th>Adresas</th>
+                <th>Įkūrimo data</th>
+
+            </tr>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => u.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => u.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => u.Type)</td>
+                    <td>@Html.DisplayFor(modelItem => u.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => u.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => u.Establishmentdate)</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
+

@@ -30,5 +30,18 @@ namespace ateitiesDB.Services.DtoConverter
 
             return newPerson;
         }
+
+        public Unit DtoUnit(UnitDto unit)
+        {
+            var newUnit = new Unit
+            {
+                Name = unit.Name,
+                Type = unit.Type,
+                Description = unit.Description,
+                Address = unit.Address
+            };
+
+            return newUnit;
+        }
     }
 }

@@ -2,13 +2,13 @@
 using ateitiesDB.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AteitisManagement.Controllers
+namespace ateitiesDB.ControllersView
 {
-    public class AteitisController : Controller
+    public class AsmenysController : Controller
     {
         private readonly IPeopleRepository _peopleRepository;
 
-        public AteitisController(IPeopleRepository peopleRepository)
+        public AsmenysController(IPeopleRepository peopleRepository)
         {
             _peopleRepository = peopleRepository;
         }
