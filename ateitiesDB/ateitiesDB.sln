@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ateitiesDB", "ateitiesDB.csproj", "{7EA7128A-7CB7-44F8-90BE-DEF266428A57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AteitisManagementSystem", "..\AteitisManagementSystem\AteitisManagementSystem.csproj", "{2689F891-3DA4-45B5-926F-8BD13D9F6DC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AteitisManagement", "..\AteitisManagement\AteitisManagement.csproj", "{8BA5AFE7-3130-4614-A480-B9848FD66920}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7EA7128A-7CB7-44F8-90BE-DEF266428A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EA7128A-7CB7-44F8-90BE-DEF266428A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EA7128A-7CB7-44F8-90BE-DEF266428A57}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2689F891-3DA4-45B5-926F-8BD13D9F6DC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2689F891-3DA4-45B5-926F-8BD13D9F6DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2689F891-3DA4-45B5-926F-8BD13D9F6DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2689F891-3DA4-45B5-926F-8BD13D9F6DC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA5AFE7-3130-4614-A480-B9848FD66920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA5AFE7-3130-4614-A480-B9848FD66920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA5AFE7-3130-4614-A480-B9848FD66920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA5AFE7-3130-4614-A480-B9848FD66920}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

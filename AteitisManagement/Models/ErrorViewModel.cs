@@ -1,4 +1,4 @@
-namespace AteitisManagementSystem.Models
+namespace AteitisManagement.Models
 {
     public class ErrorViewModel
     {
