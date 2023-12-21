@@ -1,4 +1,4 @@
-﻿using ateitiesDB.Data.DbContextFiles;
+﻿using ateitiesDB.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ateitiesDB.Controllers
@@ -7,9 +7,9 @@ namespace ateitiesDB.Controllers
     [Route("[controller]")]
     public class TestController : Controller
     {
-        private readonly AteitininkaiContext _context;
+        private readonly AteitininkaiDbContext _context;
 
-        public TestController(AteitininkaiContext context)
+        public TestController(AteitininkaiDbContext context)
         {
             _context = context;
         }
@@ -17,7 +17,7 @@ namespace ateitiesDB.Controllers
         [HttpGet("People")]
         public ActionResult GetPeople()
         {
-            var people = _context.Asmuos;
+            var people = _context.People;
 
             return Ok(people);
         }

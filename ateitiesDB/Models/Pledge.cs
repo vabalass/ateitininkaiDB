@@ -1,14 +1,21 @@
-﻿namespace ateitiesDB.Models
-{
-    public class Pledge
-    {
-        public int Id { get; set; }
-        public int PersonId { get; set; }
-        public string Association { get; set; }
-        public DateTime BadgeDate { get; set; }
-        public int? EventId { get; set; }
+﻿using System;
+using System.Collections.Generic;
 
-        public Person Person { get; set; }
-        public Event Event { get; set; }
-    }
+namespace ateitiesDB.Models;
+
+public partial class Pledge
+{
+    public int Id { get; set; }
+
+    public int Personid { get; set; }
+
+    public string Association { get; set; } = null!;
+
+    public DateOnly Date { get; set; }
+
+    public int? Eventid { get; set; }
+
+    public virtual Event? Event { get; set; }
+
+    public virtual Person Person { get; set; } = null!;
 }

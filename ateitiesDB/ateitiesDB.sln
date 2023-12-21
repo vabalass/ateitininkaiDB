@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ateitiesDB", "ateitiesDB.csproj", "{7EA7128A-7CB7-44F8-90BE-DEF266428A57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AteitisManagement", "..\AteitisManagement\AteitisManagement.csproj", "{8BA5AFE7-3130-4614-A480-B9848FD66920}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7EA7128A-7CB7-44F8-90BE-DEF266428A57} = {7EA7128A-7CB7-44F8-90BE-DEF266428A57}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
