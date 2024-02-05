@@ -17,7 +17,7 @@ builder.Services.AddScoped<IDtoToModel, DtoToModel>();
 builder.Services.AddScoped<IUnitsRepository, UnitsRepository>();
 
 // Add MVC services
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
