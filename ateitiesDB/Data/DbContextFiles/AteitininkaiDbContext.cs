@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-=======
-﻿using Microsoft.EntityFrameworkCore;
->>>>>>> main
 
 namespace ateitiesDB.Models;
 
