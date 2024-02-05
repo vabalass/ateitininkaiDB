@@ -38,8 +38,28 @@ namespace ateitiesDB.Repositories
 
         public void UpdatePerson(Person person)
         {
-            _context.Entry(person).State = EntityState.Modified;
-            _context.SaveChanges();
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    int id = person.Id;
+                    _context.Entry(person).State = EntityState.Modified;
+                    _context.SaveChanges();
+
+                    var personFromDb = GetPersonById(id);
+                    personFromDb.Registrationdate = DateTime.Now;
+                    _context.Entry(personFromDb).State = EntityState.Modified;
+                    _context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+
+                    throw;
+                }
+            }
         }
 
         public void DeletePerson(int personId)
