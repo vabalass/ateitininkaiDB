@@ -33,9 +33,17 @@ public partial class Person
 
     public DateTime Registrationdate { get; set; }
 
+<<<<<<< HEAD
     public virtual ICollection<Attendsevent>? Attendsevents { get; set; } = new List<Attendsevent>();
 
     public virtual ICollection<Belongstounit>? Belongstounits { get; set; } = new List<Belongstounit>();
 
     public virtual ICollection<Pledge>? Pledges { get; set; } = new List<Pledge>();
+=======
+    public virtual ICollection<Attendsevent> Attendsevents { get; set; } = new List<Attendsevent>();
+
+    public virtual ICollection<Belongstounit> Belongstounits { get; set; } = new List<Belongstounit>();
+
+    public virtual ICollection<Pledge> Pledges { get; set; } = new List<Pledge>();
+>>>>>>> main
 }

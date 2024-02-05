@@ -9,42 +9,42 @@ namespace ateitiesDB.Data.DbContextFiles
         {
         }
 
-        public DbSet<Person> People { get; set; }
-        public DbSet<MembershipFee> MembershipFees { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<BelongsToGroup> BelongsToGroups { get; set; }
-        public DbSet<ParticipatesInEvent> ParticipatesInEvents { get; set; }
-        public DbSet<Pledge> Pledges { get; set; }
+        public DbSet<PersonHM> People { get; set; }
+        public DbSet<MembershipFeeHM> MembershipFees { get; set; }
+        public DbSet<GroupHM> Groups { get; set; }
+        public DbSet<EventHM> Events { get; set; }
+        public DbSet<BelongsToGroupHM> BelongsToGroups { get; set; }
+        public DbSet<ParticipatesInEventHM> ParticipatesInEvents { get; set; }
+        public DbSet<PledgeHM> Pledges { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BelongsToGroup>()
+            modelBuilder.Entity<BelongsToGroupHM>()
                 .HasOne(b => b.Person)
                 .WithMany(p => p.BelongsToGroups)
                 .HasForeignKey(b => b.PersonId);
 
-            modelBuilder.Entity<BelongsToGroup>()
+            modelBuilder.Entity<BelongsToGroupHM>()
                 .HasOne(b => b.Group)
                 .WithMany(u => u.BelongsToGroup)
                 .HasForeignKey(b => b.GroupId);
 
-            modelBuilder.Entity<ParticipatesInEvent>()
+            modelBuilder.Entity<ParticipatesInEventHM>()
                 .HasOne(p => p.Person)
                 .WithMany(p => p.ParticipatesInEvents)
                 .HasForeignKey(p => p.PersonId);
 
-            modelBuilder.Entity<ParticipatesInEvent>()
+            modelBuilder.Entity<ParticipatesInEventHM>()
                 .HasOne(p => p.Event)
                 .WithMany(e => e.ParticipatesInEvent)
                 .HasForeignKey(p => p.EventId);
 
-            modelBuilder.Entity<Pledge>()
+            modelBuilder.Entity<PledgeHM>()
                 .HasOne(p => p.Person)
                 .WithMany(person => person.Pledges)
                 .HasForeignKey(p => p.PersonId);
 
-            modelBuilder.Entity<Pledge>()
+            modelBuilder.Entity<PledgeHM>()
                 .HasOne(b => b.Event)
                 .WithMany(e => e.Pledges)
                 .HasForeignKey(b => b.EventId);

@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 using ateitiesDB.Interfaces;
 using ateitiesDB.Models;
 using ateitiesDB.Repositories;
 using ateitiesDB.Services.DtoConverter;
+=======
+using ateitiesDB.Models;
+>>>>>>> main
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
