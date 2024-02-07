@@ -1,0 +1,39 @@
+﻿@model AFDB.Pages.Tables._PeopleTablesModel
+@{
+}
+    <table class="table table-sm table-hover table-bordered border-dark">
+        <tr>
+            <th>Id</th>
+            <th>Vardas</th>
+            <th>Pavardė</th>
+            <th>Lytis</th>
+            <th>Gimimo data</th>
+            <th>El. Paštas</th>
+            <th>Tel. Nr</th>
+            <th>Šalis</th>
+            <th>Miestas</th>
+            <th>Gatvė</th>
+            <th>Namas</th>
+            <th>Butas</th>
+            <th>Registracijos data</th>
+
+        </tr>
+        @foreach (var u in Model.People)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => u.Id)</td>
+                <td>@Html.DisplayFor(modelItem => u.Lastname)</td>
+                <td>@Html.DisplayFor(modelItem => u.Firstname)</td>
+                <td>@Html.DisplayFor(modelItem => u.Gender)</td>
+                <td>@Html.DisplayFor(modelItem => u.Birthdate)</td>
+                <td>@Html.DisplayFor(modelItem => u.Email)</td>
+                <td>@Html.DisplayFor(modelItem => u.Phone)</td>
+                <td>@Html.DisplayFor(modelItem => u.Country)</td>
+                <td>@Html.DisplayFor(modelItem => u.City)</td>
+                <td>@Html.DisplayFor(modelItem => u.Street)</td>
+                <td>@Html.DisplayFor(modelItem => u.House)</td>
+                <td>@Html.DisplayFor(modelItem => u.Apartment)</td>
+                <td>@Html.DisplayFor(modelItem => u.Registrationdate)</td>
+            </tr>
+        }
+    </table>

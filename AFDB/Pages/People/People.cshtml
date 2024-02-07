@@ -1,0 +1,15 @@
+﻿@page
+@using AFDB.Pages.Tables
+@model PeopleModel
+@{
+    ViewData["Title"] = "People page";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Asmenų sąrašas</h2>
+</div>
+
+<div>
+    @await Html.PartialAsync("Tables/_PeopleTables", new _PeopleTablesModel(Model._context))
+</div>
+
