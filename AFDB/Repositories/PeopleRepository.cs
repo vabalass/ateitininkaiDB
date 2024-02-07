@@ -1,8 +1,9 @@
-﻿using ateitiesDB.Interfaces;
-using ateitiesDB.Models;
+﻿using AFDB.Data;
+using AFDB.Interfaces;
+using AFDB.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ateitiesDB.Repositories
+namespace AFDB.Repositories
 {
     public class PeopleRepository : IPeopleRepository
     {

@@ -10,6 +10,6 @@
 </div>
 
 <div>
-    @await Html.PartialAsync("Tables/_PeopleTables", new _PeopleTablesModel(Model._context))
+    @await Html.PartialAsync("Tables/_PeopleTables", new _PeopleTablesModel(Model.peopleRepository))
 </div>
 

@@ -1,16 +1,17 @@
 using AFDB.Data;
-using Microsoft.AspNetCore.Mvc;
+using AFDB.Interfaces;
+using AFDB.Repositories;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AFDB.Pages.People
 {
     public class PeopleModel : PageModel
     {
-        public AteitininkaiDbContext _context { get; set; }
+        public IPeopleRepository peopleRepository;
 
-        public PeopleModel(AteitininkaiDbContext context)
+        public PeopleModel(IPeopleRepository pr)
         {
-            _context = context;
+            peopleRepository = pr;
         }
         public void OnGet()
         {

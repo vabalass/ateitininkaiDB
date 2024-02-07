@@ -1,4 +1,6 @@
 using AFDB.Data;
+using AFDB.Interfaces;
+using AFDB.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AteitisDbContext"))
     );
+
+// Add services to the container.
+builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 
 var app = builder.Build();
 

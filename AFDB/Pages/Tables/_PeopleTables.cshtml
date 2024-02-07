@@ -1,8 +1,10 @@
 ﻿@model AFDB.Pages.Tables._PeopleTablesModel
 @{
+    int i = 1;
 }
-    <table class="table table-sm table-hover table-bordered border-dark">
+    <table class="table table-sm table-hover table-bordered">
         <tr>
+            <th>#</th>
             <th>Id</th>
             <th>Vardas</th>
             <th>Pavardė</th>
@@ -21,6 +23,7 @@
         @foreach (var u in Model.People)
         {
             <tr>
+                <td>@i</td>
                 <td>@Html.DisplayFor(modelItem => u.Id)</td>
                 <td>@Html.DisplayFor(modelItem => u.Lastname)</td>
                 <td>@Html.DisplayFor(modelItem => u.Firstname)</td>
@@ -35,5 +38,6 @@
                 <td>@Html.DisplayFor(modelItem => u.Apartment)</td>
                 <td>@Html.DisplayFor(modelItem => u.Registrationdate)</td>
             </tr>
+            ++i;
         }
     </table>
