@@ -2,7 +2,7 @@
 @{
     int i = 1;
 }
-    <table class="table table-sm table-hover table-bordered">
+<table class="table table-sm table-hover table-striped">
         <tr>
             <th>#</th>
             <th>Id</th>
@@ -23,7 +23,7 @@
         @foreach (var u in Model.People)
         {
             <tr>
-                <td>@i</td>
+                <th scope="row">@i</th>
                 <td>@Html.DisplayFor(modelItem => u.Id)</td>
                 <td>@Html.DisplayFor(modelItem => u.Lastname)</td>
                 <td>@Html.DisplayFor(modelItem => u.Firstname)</td>
