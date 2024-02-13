@@ -1,6 +1,4 @@
-using AFDB.Data;
 using AFDB.Interfaces;
-using AFDB.Repositories;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AFDB.Pages.People

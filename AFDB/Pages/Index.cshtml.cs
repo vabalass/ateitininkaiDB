@@ -1,5 +1,4 @@
-using AFDB.Data;
-using Microsoft.AspNetCore.Mvc;
+using AFDB.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AFDB.Pages

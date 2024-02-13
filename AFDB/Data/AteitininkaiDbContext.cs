@@ -1,7 +1,6 @@
-﻿using AFDB.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AFDB.Data;
+namespace AFDB.Models;
 
 public partial class AteitininkaiDbContext : DbContext
 {

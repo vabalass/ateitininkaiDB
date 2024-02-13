@@ -1,5 +1,5 @@
-using AFDB.Data;
 using AFDB.Interfaces;
+using AFDB.Models;
 using AFDB.Repositories;
 using Microsoft.EntityFrameworkCore;
 

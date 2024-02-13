@@ -1,5 +1,4 @@
-﻿using AFDB.Data;
-using AFDB.Interfaces;
+﻿using AFDB.Interfaces;
 using AFDB.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,10 +19,10 @@ namespace AFDB.Repositories
 
         public Person GetPersonById(int personId)
         {
-            var person = _context.People.Find(personId);
-            if (person != null)
+            var Person = _context.People.Find(personId);
+            if (Person != null)
             {
-                return person;
+                return Person;
             }
             else
             {
@@ -31,20 +30,20 @@ namespace AFDB.Repositories
             }
         }
 
-        public void AddPerson(Person person)
+        public void AddPerson(Person Person)
         {
-            _context.People.Add(person);
+            _context.People.Add(Person);
             _context.SaveChanges();
         }
 
-        public void UpdatePerson(Person person)
+        public void UpdatePerson(Person Person)
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    int id = person.Id;
-                    _context.Entry(person).State = EntityState.Modified;
+                    int id = Person.Id;
+                    _context.Entry(Person).State = EntityState.Modified;
                     _context.SaveChanges();
 
                     var personFromDb = GetPersonById(id);
@@ -65,10 +64,10 @@ namespace AFDB.Repositories
 
         public void DeletePerson(int personId)
         {
-            var person = _context.People.Find(personId);
-            if (person != null)
+            var Person = _context.People.Find(personId);
+            if (Person != null)
             {
-                _context.People.Remove(person);
+                _context.People.Remove(Person);
                 _context.SaveChangesAsync();
             }
         }

@@ -5,75 +5,66 @@
 
 <h1>Asmens sukūrimas</h1>
 
-<form method="post">
-    <input type="email" asp-for="Person.Email"/>
-    <input type="text" asp-for="Person.Firstname"/>
-    <button type="submit" class="btn btn-primary">Išsaugoti</button>
-</form>
-
-<div class="container mt-5">
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="firstname">Vardas</label>
-                <input type="text" class="form-control" id="firstname" placeholder="Pranas" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="lastname">Pavardė</label>
-                <input type="text" class="form-control" id="lastname" placeholder="Dovydatis" required>
-            </div>
+<form class="col-md-6 needs-validation" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Vardas</label>
+            <input type="text" class="form-control" maxlength="32" required asp-for="Person.Firstname" />
+        </div>        
+        <div class="col-md-6">
+            <label class="form-label">Pavardė</label>
+            <input type="text" class="form-control" maxlength="32" required asp-for="Person.Lastname" />
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="gender">lytis</label>
-                <select class="form-control" id="gender" required>
-                    <option value="male">vyr</option>
-                    <option value="female">mot</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="birthdate">Gimimo data</label>
-                <input type="date" class="form-control" id="birthdate" required>
-            </div>
+    </div>
+    <div>
+        <label class="form-label">Lytis</label>
+        <select class="form-select" maxlength="4" required asp-for="Person.Gender">
+            <option>vyr</option>
+            <option>mot</option>
+        </select>
+    </div>
+    <div>
+        <label class="form-label">Gimimo data</label>
+        <input type="date" class="form-control" value="2000-01-01" required asp-for="Person.Birthdate" />
+    </div>
+    <div>
+        <label class="form-label">El. pašto adresas</label>
+        <input type="email" class="form-control" maxlength="50" asp-for="Person.Email" />
+    </div>
+    <div>
+        <label class="form-label">Tel. nr</label>
+        <input type="text" class="form-control" maxlength="15" asp-for="Person.Phone" />
+    </div>
+    <div>
+        <label class="form-label">Aprašymas</label>
+        <textarea class="form-control" rows="3" maxlength="300" asp-for="Person.Description"></textarea>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Šalis</label>
+            <input type="text" class="form-control" maxlength="32" value="Lietuva" asp-for="Person.Country" />
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="email">El. paštas</label>
-                <input type="email" class="form-control" id="email" placeholder="dovydukas1910@ateitis.lt">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="phone">Tel. nr.</label>
-                <input type="tel" class="form-control" id="phone" placeholder="+37061910011">
-            </div>
+        <div class="col-md-6">
+            <label class="form-label">Miestas</label>
+            <input type="text" class="form-control" maxlength="20" asp-for="Person.City" />
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="country">Šalis</label>
-                <input type="text" class="form-control" id="country" placeholder="Lietuva">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="description">Aprašymas</label>
-                <textarea class="form-control" id="description" rows="3" placeholder="Lietuvos Nepriklausomybės Akto signataras, Ministras pirmininkas, teisininkas, filosofijos mokslų daktaras, profesorius, Lietuvos ateitininkų sąjungos vadovas, enciklopedistas, apie 40 periodinių leidinių redaktorius ir leidėjas."></textarea>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label class="form-label">Gatvė</label>
+            <input type="text" class="form-control" maxlength="30" asp-for="Person.Street" />
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="street">Gatvė</label>
-                <input type="text" class="form-control" id="street" placeholder="Laisvės al.">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="city">Miestas</label>
-                <input type="text" class="form-control" id="city" placeholder="Kaunas">
-            </div>
-            <div class="form-group col-md-2">
-                <label for="house">Namas</label>
-                <input type="text" class="form-control" id="house" placeholder="13">
-            </div>
-            <div class="form-group col-md-2">
-                <label for="apartment">Butas</label>
-                <input type="text" class="form-control" id="apartment" placeholder="1">
-            </div>
+        <div class="col-md-4">
+            <label class="form-label">Namo nr.</label>
+            <input type="text" class="form-control" maxlength="4" asp-for="Person.House" />
         </div>
+        <div class="col-md-4">
+            <label class="form-label">Buto nr.</label>
+            <input type="text" class="form-control" maxlength="4" asp-for="Person.Apartment" />
+        </div>
+    </div>
+    <div class="pt-3 pb-3 d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Išsaugoti</button>
-    </form>
-</div>
+        <a href='javascript:history.go(-1)' class="btn btn-danger">Atšaukti</a>
+    </div>
+</form>

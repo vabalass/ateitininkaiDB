@@ -1,4 +1,6 @@
+using AFDB.Interfaces;
 using AFDB.Models;
+using AFDB.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,15 +10,17 @@ namespace AFDB.Pages.People
     {
         [BindProperty]
         public Person Person { get; set; }
+        private readonly IPeopleRepository _peopleRepository;
 
-        public CreatePersonModel() 
+        public CreatePersonModel(IPeopleRepository peopleRepository) 
         {
+            _peopleRepository = peopleRepository;
             Person = new Person();
         }
-        public void OnPost()
+        public RedirectToPageResult OnPost()
         {
-            Console.WriteLine(Person.Email);
-            Console.WriteLine(Person.Firstname);
+            _peopleRepository.AddPerson(Person);
+            return RedirectToPage("/People/People");
         }
         public void OnGet()
         {

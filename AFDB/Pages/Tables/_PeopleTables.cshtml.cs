@@ -1,4 +1,3 @@
-using AFDB.Data;
 using AFDB.Interfaces;
 using AFDB.Models;
 using Microsoft.AspNetCore.Mvc;
