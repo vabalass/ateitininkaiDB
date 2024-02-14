@@ -6,7 +6,7 @@ namespace AFDB.Interfaces
     {
         IEnumerable<Person> GetAllPeople();
         Person GetPersonById(int personId);
-        void AddPerson(Person Person);
+        Person AddPerson(Person Person); //returns new Person
         void UpdatePerson(Person Person);
         void DeletePerson(int personId);
     }

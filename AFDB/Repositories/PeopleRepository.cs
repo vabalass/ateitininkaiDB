@@ -19,7 +19,12 @@ namespace AFDB.Repositories
 
         public Person GetPersonById(int personId)
         {
-            var Person = _context.People.Find(personId);
+            var Person = _context.People
+                      .Include(p => p.Attendsevents)
+                      .Include(p => p.Belongstounits)
+                      .Include(p => p.Pledges)
+                      .Where(p => p.Id == personId)
+                      .FirstOrDefault();
             if (Person != null)
             {
                 return Person;
@@ -30,10 +35,11 @@ namespace AFDB.Repositories
             }
         }
 
-        public void AddPerson(Person Person)
+        public Person AddPerson(Person Person)
         {
             _context.People.Add(Person);
             _context.SaveChanges();
+            return Person;
         }
 
         public void UpdatePerson(Person Person)

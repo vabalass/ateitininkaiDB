@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
+builder.Services.AddScoped<IPledgeRepository, PledgeRepository>();
 
 var app = builder.Build();
 

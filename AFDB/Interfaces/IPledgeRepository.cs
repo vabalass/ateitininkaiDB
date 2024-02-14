@@ -4,6 +4,8 @@ namespace AFDB.Interfaces
 {
     public interface IPledgeRepository
     {
-        void AddPledge(Pledge pledge);
+        IEnumerable<Pledge> GetAllPledges();
+        public void AddPledgeWithPerson(Pledge pledge, Person person);
+        public void AddPledge(Pledge pledge);
     }
 }
