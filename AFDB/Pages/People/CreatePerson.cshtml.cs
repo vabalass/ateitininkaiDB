@@ -1,9 +1,7 @@
 using AFDB.Interfaces;
 using AFDB.Models;
-using AFDB.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Linq;
 
 namespace AFDB.Pages.People
 {
@@ -12,9 +10,7 @@ namespace AFDB.Pages.People
         [BindProperty]
         public Person Person { get; set; }
         [BindProperty]
-        public Pledge Pledge { get; set; }
-        [BindProperty]
-        public bool HasPledge { get; set; }
+        public Pledge[] Pledges { get; set; }
         private readonly IPeopleRepository _peopleRepository;
         private readonly IPledgeRepository _pledgeRepository;
 
@@ -23,17 +19,24 @@ namespace AFDB.Pages.People
             _peopleRepository = peopleRepository;
             _pledgeRepository = pledgeRepository;
             Person = new Person();
-            Pledge = new Pledge();
-            HasPledge = false;
+            Pledges = new Pledge[4];
         }
         public RedirectToPageResult OnPost()
         {
-            _peopleRepository.AddPerson(Person);
-            if(HasPledge && Pledge.Association != null)
+            Pledges[0].Association = "JAS";
+            Pledges[1].Association = "MAS";
+            Pledges[2].Association = "SAS";
+            Pledges[3].Association = "ASS";
+            for (int i = 0; i < Pledges.Length; i++)
             {
-                _pledgeRepository.AddPledgeWithPerson(Pledge, Person);
-                Console.WriteLine("PledgeAdded!");
+                if (Pledges[i].Date != DateOnly.MinValue)
+                {
+                    Console.WriteLine(Pledges[i].Association);
+                    Person.Pledges.Add(Pledges[i]);
+                    Console.WriteLine("PledgeAdded!");
+                }
             }
+            _peopleRepository.AddPerson(Person);
             return RedirectToPage("/People/People");
         }
         public void OnGet()

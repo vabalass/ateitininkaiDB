@@ -1,6 +1,7 @@
 using AFDB.Interfaces;
 using AFDB.Models;
 using AFDB.Repositories;
+using AFDB.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
 // Add services to the container.
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 builder.Services.AddScoped<IPledgeRepository, PledgeRepository>();
+builder.Services.AddScoped<IDownloadCSV, DownloadCSV>();
 
 var app = builder.Build();
 

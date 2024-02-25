@@ -6,7 +6,7 @@
 <h1>Asmens sukūrimas</h1>
 
 <form class="cold-md-12 d-flex flex-wrap needs-validation" method="post">
-    <div class="p-2 col-md-6" >
+    <div class="p-2 col-md-4" >
         <div class="row">
             <div class="col-md-6">
                 <label class="form-label">Vardas</label>
@@ -65,28 +65,26 @@
             </div>
         </div>
     </div>
-    <div class="p-2 col-md-6">
-        <div class="form-check form-switch">
-            <label class="form-label">Asmuo yra AF narys</label>
-            <input class="form-check-input" type="checkbox" asp-for="HasPledge">
+    <div class="p-2 col-md-4">
+        <div>
+            <label class="form-label">JAS įžodžio data</label>
+            <input type="date" class="form-control" value="" asp-for="Pledges[0].Date" /> 
         </div>
         <div>
-            <label class="form-label">Sąjunga</label>
-            <select class="form-select" maxlength="4" asp-for="Pledge.Association">
-                <option>-</option>
-                <option>JAS</option>
-                <option>MAS</option>
-                <option>SAS</option>
-                <option>ASS</option>
-            </select>
+            <label class="form-label">MAS įžodžio data</label>
+            <input type="date" class="form-control" value="" asp-for="Pledges[1].Date" />
         </div>
         <div>
-            <label class="form-label">Įžodžio data</label>
-            <input type="date" class="form-control" value="" asp-for="Pledge.Date" />
+            <label class="form-label">SAS įžodžio data</label>
+            <input type="date" class="form-control" value="" asp-for="Pledges[2].Date" />
+        </div>
+        <div>
+            <label class="form-label">ASS įžodžio data</label>
+            <input type="date" class="form-control" value="" asp-for="Pledges[3].Date" />
         </div>
     </div>
-    <div class="col-md-6 p-2 d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary">Išsaugoti</button>
-        <a href='javascript:history.go(-1)' class="btn btn-danger">Atšaukti</a>
+    <div class="col-md-12 p-2">
+        <button type="submit" class="btn btn-primary m-2">Išsaugoti</button>
+        <a href='javascript:history.go(-1)' class="btn btn-danger m-2">Atšaukti</a>
     </div>
 </form>
