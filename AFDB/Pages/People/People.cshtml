@@ -8,46 +8,19 @@
     <h2 class="display-4">Asmenų sąrašas</h2>
 </div>
 
-<div class="p-2">
-    <a type="button" class="btn btn-primary" asp-area="" asp-page="/People/CreatePerson">Pridėti asmenį</a>
-</div>
-<div class="p-2">
-    <a id="downloadCsvBtn" type="button" class="btn btn-success">Atsiųsti sąrašą .csv</a>
+<div class="cold-md-12 d-flex flex-wrap">
+    <div class="p-2">
+        <a type="button" class="btn btn-primary" asp-area="" asp-page="/People/CreatePerson">Pridėti asmenį</a>
+    </div>
+    <div class="p-2">
+        <form method="post">
+            <button type="submit" asp-page-handler="DownloadFile" class="btn btn-success">Atsiųsti .csv</button>
+        </form>
+    </div>
 </div>
 
 <div>
     @await Html.PartialAsync("Tables/_PeopleTables", new Tables._PeopleTablesModel(Model.peopleRepository))
 </div>
 
-@section Scripts {
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("downloadCsvBtn").addEventListener("click", function () {
-                // Make an AJAX request to the server to trigger the file download
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "/Index?handler=DownloadPeopleCSV", true);
-                xhr.responseType = "blob"; // Set response type to blob
-                xhr.onload = function () {
-                    // Create a Blob object and URL to open the file explorer dialog
-                    var blob = new Blob([xhr.response], { type: 'application/octet-stream' });
-                    var url = window.URL.createObjectURL(blob);
-
-                    // Create an anchor element to trigger the download
-                    var link = document.createElement('a');
-                    link.href = url;
-                    link.download = "people.csv";
-
-                    // Trigger a click event to open the file explorer dialog
-                    var clickEvent = new MouseEvent('click', {
-                        bubbles: true,
-                        cancelable: true,
-                        view: window
-                    });
-                    link.dispatchEvent(clickEvent);
-                };
-                xhr.send();
-            });
-        });
-    </script>
-}
 

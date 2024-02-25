@@ -15,10 +15,10 @@ namespace AFDB.Pages.People
             peopleRepository = pr;
             _downloadCSV = downloadCSV;
         }
-        public IActionResult DownloadPeopleCSV()
+        public ActionResult OnPostDownloadFile()
         {
             var people = peopleRepository.GetAllPeople();
-            return _downloadCSV.DownloadPeopleCSV(people);
+            return (ActionResult)_downloadCSV.DownloadPeopleCSV(people);
         }
         public void OnGet()
         {

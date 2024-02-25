@@ -11,23 +11,20 @@ namespace AFDB.Services
     {
         public IActionResult DownloadPeopleCSV(IEnumerable<Person> people)
         {
-            using (var memoryStream = new MemoryStream())
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamWriter writer = new StreamWriter(memoryStream))
+            using (CsvWriter csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
             {
-                // CsvHelper configuration
-                var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture);
+                csv.WriteRecords(people);
+                writer.Flush();
 
-                // CsvWriter writes data to the memory stream
-                using (var writer = new StreamWriter(memoryStream))
-                using (var csv = new CsvWriter(writer, csvConfig))
+                // Set the position of the memory stream to the beginning
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                // Return a FileResult with the CSV data
+                return new FileContentResult(memoryStream.ToArray(), "text/csv")
                 {
-                    csv.WriteRecords(people);
-                }
-
-                memoryStream.Position = 0;
-
-                return new FileStreamResult(memoryStream, "text/csv")
-                {
-                    FileDownloadName = "people.csv"
+                    FileDownloadName = $"people_{DateTime.Now:yyyyMMddHHmmss}.csv"
                 };
             }
         }
