@@ -13,6 +13,9 @@
         <a type="button" class="btn btn-primary" asp-area="" asp-page="/People/CreatePerson">Pridėti asmenį</a>
     </div>
     <div class="p-2">
+        <a type="button" class="btn btn-primary" asp-area="" asp-page="/People/AddPeople">Pridėti asmenys iš failo</a>
+    </div>
+    <div class="p-2">
         <form method="post">
             <button type="submit" asp-page-handler="DownloadFile" class="btn btn-success">Atsiųsti .csv</button>
         </form>
@@ -20,7 +23,7 @@
 </div>
 
 <div>
-    @await Html.PartialAsync("Tables/_PeopleTables", new Tables._PeopleTablesModel(Model.peopleRepository))
+    @await Html.PartialAsync("Tables/_PeopleTables", new Tables._PeopleTablesModel(Model.peopleRepository.GetAllPeople()))
 </div>
 
 

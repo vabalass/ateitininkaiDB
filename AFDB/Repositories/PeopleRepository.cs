@@ -42,6 +42,11 @@ namespace AFDB.Repositories
             return Person;
         }
 
+        public void AddPeople(IEnumerable<Person> people)
+        {
+            _context.People.AddRange(people);
+            _context.SaveChanges();
+        }
         public void UpdatePerson(Person Person)
         {
             using (var transaction = _context.Database.BeginTransaction())
