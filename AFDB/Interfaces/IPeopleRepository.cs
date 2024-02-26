@@ -11,5 +11,6 @@ namespace AFDB.Interfaces
         void AddPeople(IEnumerable<Person> people);
         void UpdatePerson(Person Person);
         void DeletePerson(int personId);
+        Task DeletePersonAsync(int personId);
     }
 }

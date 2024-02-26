@@ -29,8 +29,8 @@
     </div>
 </div>
 
-<div>
-    @await Html.PartialAsync("Tables/_PeopleFullTable", new Tables._PeopleFullTableModel(Model.PeopleFull))
+<div class="container-fluid">
+    @await Html.PartialAsync("Tables/_PeopleFullTable", new Tables._PeopleFullTableModel(Model.PeopleFull, Model.peopleRepository))
 </div>
 
 

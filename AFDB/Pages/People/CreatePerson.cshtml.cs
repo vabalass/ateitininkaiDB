@@ -12,32 +12,36 @@ namespace AFDB.Pages.People
         [BindProperty]
         public Pledge[] Pledges { get; set; }
         private readonly IPeopleRepository _peopleRepository;
-        private readonly IPledgeRepository _pledgeRepository;
 
         public CreatePersonModel(IPeopleRepository peopleRepository, IPledgeRepository pledgeRepository)
         {
             _peopleRepository = peopleRepository;
-            _pledgeRepository = pledgeRepository;
             Person = new Person();
             Pledges = new Pledge[4];
         }
-        public RedirectToPageResult OnPost()
+        public ActionResult OnPost()
         {
-            Pledges[0].Association = "JAS";
-            Pledges[1].Association = "MAS";
-            Pledges[2].Association = "SAS";
-            Pledges[3].Association = "ASS";
-            for (int i = 0; i < Pledges.Length; i++)
+            try
             {
-                if (Pledges[i].Date != DateOnly.MinValue)
+                Pledges[0].Association = "JAS";
+                Pledges[1].Association = "MAS";
+                Pledges[2].Association = "SAS";
+                Pledges[3].Association = "ASS";
+                for (int i = 0; i < Pledges.Length; i++)
                 {
-                    Console.WriteLine(Pledges[i].Association);
-                    Person.Pledges.Add(Pledges[i]);
-                    Console.WriteLine("PledgeAdded!");
+                    if (Pledges[i].Date != DateOnly.MinValue)
+                    {
+                        Person.Pledges.Add(Pledges[i]);
+                    }
                 }
+                _peopleRepository.AddPerson(Person);
+                return RedirectToPage("/People/People");
             }
-            _peopleRepository.AddPerson(Person);
-            return RedirectToPage("/People/People");
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
         }
         public void OnGet()
         {

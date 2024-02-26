@@ -7,6 +7,7 @@ namespace AFDB.Services
     {
         public static void PrintPerson(Person Person) 
         {
+            Console.WriteLine("ID: " + Person.Id);
             Console.WriteLine(Person.Firstname + " " + Person.Lastname);
             Console.WriteLine(Person.Gender);
             Console.WriteLine("birth: " + Person.Birthdate);

@@ -141,7 +141,7 @@ namespace AFDB.Services.CSVServices
                     Firstname = $"Vardenis{i}",
                     Lastname = $"Pavardenis{i}",
                     Gender = i % 2 == 0 ? "vyr" : "mot",
-                    Birthdate = new DateOnly(random.Next(1950, 2000), random.Next(1, 13), random.Next(1, 29)),
+                    Birthdate = new DateOnly(random.Next(1970, 2000), random.Next(1, 13), random.Next(1, 29)),
                     Email = $"pastas{i}@example.com",
                     Phone = $"+3706111111{i}",
                     Country = "Lietuva",

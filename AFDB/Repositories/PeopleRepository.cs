@@ -1,5 +1,6 @@
 ﻿using AFDB.Interfaces;
 using AFDB.Models;
+using AFDB.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace AFDB.Repositories
@@ -52,29 +53,53 @@ namespace AFDB.Repositories
             _context.People.AddRange(people);
             _context.SaveChanges();
         }
-        public void UpdatePerson(Person Person)
+        public void UpdatePerson(Person updatedPerson)
         {
-            using (var transaction = _context.Database.BeginTransaction())
+            
+            var existingPerson = GetPersonById(updatedPerson.Id);
+
+            try
             {
-                try
+                existingPerson.Firstname = updatedPerson.Firstname;
+                existingPerson.Lastname = updatedPerson.Lastname;
+                existingPerson.Gender = updatedPerson.Gender;
+                existingPerson.Birthdate = updatedPerson.Birthdate;
+                existingPerson.Email = updatedPerson.Email;
+                existingPerson.Phone = updatedPerson.Phone;
+                existingPerson.Country = updatedPerson.Country;
+                existingPerson.Description = updatedPerson.Description;
+                existingPerson.Street = updatedPerson.Street;
+                existingPerson.City = updatedPerson.City;
+                existingPerson.House = updatedPerson.House;
+                existingPerson.Apartment = updatedPerson.Apartment;
+
+                foreach (var updatedPledge in updatedPerson.Pledges)
                 {
-                    int id = Person.Id;
-                    _context.Entry(Person).State = EntityState.Modified;
-                    _context.SaveChanges();
+                    // Check if a pledge with the same association already exists
+                    var existingPledge = existingPerson.Pledges.FirstOrDefault(p => p.Association == updatedPledge.Association);
 
-                    var personFromDb = GetPersonById(id);
-                    personFromDb.Registrationdate = DateTime.Now;
-                    _context.Entry(personFromDb).State = EntityState.Modified;
-                    _context.SaveChanges();
-
-                    transaction.Commit();
+                    if (existingPledge == null)
+                    {
+                        // If the pledge with the same association doesn't exist, add a new one
+                        existingPerson.Pledges.Add(new Pledge
+                        {
+                            Association = updatedPledge.Association,
+                            Date = updatedPledge.Date,
+                            Personid = updatedPerson.Id
+                        });
+                    }
+                    else
+                    {
+                        // If the pledge with the same association exists, update its date
+                        existingPledge.Date = updatedPledge.Date;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
 
-                    throw;
-                }
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString()); 
             }
         }
 
@@ -85,6 +110,15 @@ namespace AFDB.Repositories
             {
                 _context.People.Remove(Person);
                 _context.SaveChangesAsync();
+            }
+        }
+        public async Task DeletePersonAsync(int personId)
+        {
+            var person = await _context.People.FindAsync(personId);
+            if (person != null)
+            {
+                _context.People.Remove(person);
+                await _context.SaveChangesAsync();
             }
         }
     }

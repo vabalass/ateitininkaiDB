@@ -1,5 +1,5 @@
 ﻿@page
-@model AFDB.Pages.People.CreatePersonModel
+@model AFDB.Pages.People.EditPersonModel
 @{
 }
 
@@ -10,15 +10,19 @@
     </div>
 }
 
-<h1>Asmens sukūrimas</h1>
+<h1>Asmens redagavimas</h1>
 
 <form class="cold-md-12 d-flex flex-wrap needs-validation" method="post">
-    <div class="p-2 col-md-4" >
+    <div class="p-2 col-md-4">
+        <div>
+            <label class="form-label">Id</label>
+            <input type="text" class="form-control" maxlength="32" readonly asp-for="Person.Id" />
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <label class="form-label">Vardas</label>
                 <input type="text" class="form-control" maxlength="32" required asp-for="Person.Firstname" />
-            </div>        
+            </div>
             <div class="col-md-6">
                 <label class="form-label">Pavardė</label>
                 <input type="text" class="form-control" maxlength="32" required asp-for="Person.Lastname" />
@@ -33,7 +37,7 @@
         </div>
         <div>
             <label class="form-label">Gimimo data</label>
-            <input type="date" class="form-control" value="" required asp-for="Person.Birthdate" />
+            <input type="date" class="form-control" required asp-for="Person.Birthdate" />
         </div>
         <div>
             <label class="form-label">El. pašto adresas</label>
@@ -50,7 +54,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label class="form-label">Šalis</label>
-                <input type="text" class="form-control" maxlength="32" value="Lietuva" asp-for="Person.Country" />
+                <input type="text" class="form-control" maxlength="32" asp-for="Person.Country" />
             </div>
             <div class="col-md-6">
                 <label class="form-label">Miestas</label>
@@ -75,19 +79,19 @@
     <div class="p-2 col-md-4">
         <div>
             <label class="form-label">JAS įžodžio data</label>
-            <input type="date" class="form-control" asp-for="Pledges[0].Date" />
+            <input type="date" class="form-control" asp-for="PledgeDates[0]" />
         </div>
         <div>
             <label class="form-label">MAS įžodžio data</label>
-            <input type="date" class="form-control" asp-for="Pledges[1].Date" />
+            <input type="date" class="form-control" asp-for="PledgeDates[1]" />
         </div>
         <div>
             <label class="form-label">SAS įžodžio data</label>
-            <input type="date" class="form-control" asp-for="Pledges[2].Date" />
+            <input type="date" class="form-control" asp-for="PledgeDates[2]" />
         </div>
         <div>
             <label class="form-label">ASS įžodžio data</label>
-            <input type="date" class="form-control" asp-for="Pledges[3].Date" />
+            <input type="date" class="form-control" asp-for="PledgeDates[3]" />
         </div>
     </div>
     <div class="col-md-12 p-2">

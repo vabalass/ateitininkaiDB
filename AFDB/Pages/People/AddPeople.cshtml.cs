@@ -27,22 +27,30 @@ namespace AFDB.Pages.People
 
         public ActionResult OnPostAddPeopleToDB() 
         {
-            People = PeopleStorage.GetPeople();
-            if (People != null && People.Any())
+            try
             {
-                try
+                People = PeopleStorage.GetPeople();
+                if (People != null && People.Any())
                 {
-                    _peopleRepository.AddPeople(People);
+                    try
+                    {
+                        _peopleRepository.AddPeople(People);
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                        return Page();
+                    }
+                    return RedirectToPage("/People/People");
                 }
-                catch (Exception ex)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, ex.InnerException.Message);
                     return Page();
                 }
-                return RedirectToPage("/People/People");
             }
-            else
+            catch(Exception ex)
             {
+                ModelState.AddModelError(string.Empty, ex.Message);
                 return Page();
             }
         }

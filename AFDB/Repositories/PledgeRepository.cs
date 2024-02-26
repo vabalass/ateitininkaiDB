@@ -27,5 +27,9 @@ namespace AFDB.Repositories
         {
             _context.Pledges.Add(pledge);
         }
+        public void DeletePledge(Pledge pledgeToDelete)
+        {
+            _context.Pledges.Remove(pledgeToDelete);
+        }
     }
 }

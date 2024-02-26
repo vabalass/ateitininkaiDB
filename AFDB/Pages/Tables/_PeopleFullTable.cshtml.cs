@@ -10,7 +10,8 @@ namespace AFDB.Pages.Tables
     {
         [BindProperty]
         public IEnumerable<PersonFull>? _PeopleFull { get; set; }
-        public _PeopleFullTableModel(IEnumerable<PersonFull> peopleFull)
+        private readonly IPeopleRepository _peopleRepository;
+        public _PeopleFullTableModel(IEnumerable<PersonFull> peopleFull, IPeopleRepository peopleRepository)
         {
             if(peopleFull != null)
             { 
@@ -20,6 +21,23 @@ namespace AFDB.Pages.Tables
             {
                 _PeopleFull = new List<PersonFull>();
             }
+            _peopleRepository = peopleRepository;
+        }
+        public void OnPostDeletePerson()
+        {
+            /*
+            Console.WriteLine($"Deleting person with ID: {personId}");
+            try
+            {
+                _peopleRepository.DeletePerson(personId);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+            }
+            return RedirectToPage();
+            */
+            Console.WriteLine("Pasiekta.");
         }
         public void OnGet()
         {
