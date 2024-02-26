@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace AFDB.Pages.Tables
 {
-    public class _PeopleTablesModel : PageModel
+    public class _AddPeopleTableModel : PageModel
     {
         [BindProperty]
         public IEnumerable<Person>? _People { get; set; }
-        public _PeopleTablesModel(IEnumerable<Person> people)
+        public _AddPeopleTableModel(IEnumerable<Person> people)
         {
             if(people != null)
             { 

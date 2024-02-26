@@ -4,6 +4,13 @@
     ViewData["Title"] = "People page";
 }
 
+@if (!ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> @Html.Raw(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).FirstOrDefault())
+    </div>
+}
+
 <div class="text-center">
     <h2 class="display-4">Asmenų sąrašas</h2>
 </div>
@@ -23,7 +30,7 @@
 </div>
 
 <div>
-    @await Html.PartialAsync("Tables/_PeopleTables", new Tables._PeopleTablesModel(Model.peopleRepository.GetAllPeople()))
+    @await Html.PartialAsync("Tables/_PeopleFullTable", new Tables._PeopleFullTableModel(Model.PeopleFull))
 </div>
 
 

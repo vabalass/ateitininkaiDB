@@ -36,7 +36,8 @@ namespace AFDB.Pages.People
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                    return Page();
                 }
                 return RedirectToPage("/People/People");
             }
@@ -44,7 +45,6 @@ namespace AFDB.Pages.People
             {
                 return Page();
             }
-
         }
 
         public IActionResult OnPostReadFile()

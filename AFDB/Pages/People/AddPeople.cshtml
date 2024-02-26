@@ -3,6 +3,13 @@
 @{
 }
 
+@if (!ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> @Html.Raw(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).FirstOrDefault())
+    </div>
+}
+
 <h1>Asmenų pridėjimas iš failo</h1>
 
 <div class="col-md-12 d-flex flex-wrap justify-content-start ">
@@ -26,13 +33,12 @@
     </div>
 </div>
 
+<div>
+    @await Html.PartialAsync("Tables/_AddPeopleTable", new Tables._AddPeopleTableModel(Model.People))
+</div>
+
 <div class="p-2">
     <form method="post">
         <button type="submit" asp-page-handler="AddPeopleToDB" class="btn btn-primary">Pridėti žmonės į duomenų bazę</button>
     </form>
 </div>
-
-<div>
-    @await Html.PartialAsync("Tables/_PeopleTables", new Tables._PeopleTablesModel(Model.People))
-</div>
-

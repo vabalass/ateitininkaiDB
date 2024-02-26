@@ -15,7 +15,7 @@ public partial class PersonFull
 
     public DateOnly? Birthdate { get; set; }
 
-    public decimal? Age { get; set; }
+    public int? Age { get; set; }
 
     public string? Email { get; set; }
 

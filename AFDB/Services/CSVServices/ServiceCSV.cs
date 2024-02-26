@@ -32,6 +32,25 @@ namespace AFDB.Services.CSVServices
             }
         }
 
+        public sealed class PersonFullCsvMap : ClassMap<PersonFull>
+        {
+            public PersonFullCsvMap()
+            {
+                Map(m => m.Id).Name("Id");
+                Map(m => m.Firstname).Name("Vardas");
+                Map(m => m.Lastname).Name("Pavardė");
+                Map(m => m.Age).Name("Amžius");
+                Map(m => m.Gender).Name("Lytis");
+                Map(m => m.Membershipstatus).Name("Narystė");
+                Map(m => m.Email).Name("El. paštas");
+                Map(m => m.Phone).Name("Tel. nr.");
+                Map(m => m.Description).Name("Aprašymas");
+                Map(m => m.Country).Name("Šalis");
+                Map(m => m.Address).Name("Adresas");
+                Map(m => m.Registrationdate).Name("Registracijos data");
+            }
+        }
+
         public sealed class ExamplePersonCsvMap : ClassMap<Person>
         {
             public ExamplePersonCsvMap()
@@ -52,6 +71,25 @@ namespace AFDB.Services.CSVServices
                 // Exclude properties
                 Map(m => m.Id).Ignore();
                 Map(m => m.Registrationdate).Ignore();
+            }
+        }
+
+        public IActionResult DownloadPeopleFullCSV(IEnumerable<PersonFull> people)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamWriter writer = new StreamWriter(memoryStream, Encoding.UTF8))
+            using (CsvWriter csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
+            {
+                csv.Context.RegisterClassMap(new PersonFullCsvMap());
+                csv.WriteRecords(people);
+                writer.Flush();
+
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                return new FileContentResult(memoryStream.ToArray(), "text/csv")
+                {
+                    FileDownloadName = $"AFasmenys_{DateTime.Now:yyyyMMddHHmmss}.csv"
+                };
             }
         }
 

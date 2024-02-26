@@ -5,6 +5,7 @@ namespace AFDB.Interfaces
     public interface IPeopleRepository
     {
         IEnumerable<Person> GetAllPeople();
+        IEnumerable<PersonFull> GetAllFullPeople();
         Person GetPersonById(int personId);
         Person AddPerson(Person Person); //returns new Person
         void AddPeople(IEnumerable<Person> people);

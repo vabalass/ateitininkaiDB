@@ -17,6 +17,11 @@ namespace AFDB.Repositories
             return _context.People.ToList();
         }
 
+        public IEnumerable<PersonFull> GetAllFullPeople()
+        {
+            return _context.PersonFulls.ToList();
+        }
+
         public Person GetPersonById(int personId)
         {
             var Person = _context.People

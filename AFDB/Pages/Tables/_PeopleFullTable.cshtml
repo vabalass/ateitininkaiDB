@@ -1,0 +1,39 @@
+﻿@model AFDB.Pages.Tables._PeopleFullTableModel
+@{
+    int i = 1;
+}
+<table class="table table-sm table-hover table-striped">
+        <tr>
+            <th>#</th>
+            <th>Id</th>
+            <th>Vardas</th>
+            <th>Pavardė</th>
+            <th>Amžius</th>
+            <th>Lytis</th>
+            <th>Narystė</th>
+            <th>El. Paštas</th>
+            <th>Tel. Nr</th>
+            <th>Šalis</th>
+            <th>Adresas</th>
+            <th>Registracijos data</th>
+
+        </tr>
+        @foreach (var u in Model._PeopleFull)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td>@Html.DisplayFor(modelItem => u.Id)</td>
+                <td>@Html.DisplayFor(modelItem => u.Firstname)</td>
+                <td>@Html.DisplayFor(modelItem => u.Lastname)</td>
+                <td>@Html.DisplayFor(modelItem => u.Age)</td>
+                <td>@Html.DisplayFor(modelItem => u.Gender)</td>
+                <td>@Html.DisplayFor(modelItem => u.Membershipstatus)</td>
+                <td>@Html.DisplayFor(modelItem => u.Email)</td>
+                <td>@Html.DisplayFor(modelItem => u.Phone)</td>
+                <td>@Html.DisplayFor(modelItem => u.Country)</td>
+                <td>@Html.DisplayFor(modelItem => u.Address)</td>
+                <td>@Html.DisplayFor(modelItem => u.Registrationdate)</td>
+            </tr>
+            ++i;
+        }
+    </table>
