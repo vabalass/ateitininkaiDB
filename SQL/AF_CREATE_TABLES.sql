@@ -31,7 +31,7 @@ CREATE TABLE AF.MembershipFee (
                                     DEFAULT CURRENT_DATE,
 
     CONSTRAINT FK_Person_MembershipFee_PersonId 
-        FOREIGN KEY (PersonId) REFERENCES AF.Person(Id) ON DELETE RESTRICT ON UPDATE RESTRICT
+        FOREIGN KEY (PersonId) REFERENCES AF.Person(Id) ON DELETE CASCADE ON UPDATE SET NULL
 );
 
 CREATE TABLE AF.Unit (
@@ -72,9 +72,9 @@ CREATE TABLE AF.BelongsToUnit (
                                     CHECK (EndDate >= StartDate),
 
     CONSTRAINT FK_Person_BelongsToUnit_PersonId 
-        FOREIGN KEY (PersonId) REFERENCES AF.Person(Id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (PersonId) REFERENCES AF.Person(Id) ON DELETE CASCADE ON UPDATE SET NULL,
     CONSTRAINT FK_Unit_BelongsToUnit_UnitId 
-        FOREIGN KEY (UnitId) REFERENCES AF.Unit(Id) ON DELETE RESTRICT ON UPDATE RESTRICT
+        FOREIGN KEY (UnitId) REFERENCES AF.Unit(Id) ON DELETE CASCADE ON UPDATE SET NULL
 );
 
 CREATE TABLE AF.AttendsEvent (
@@ -87,9 +87,9 @@ CREATE TABLE AF.AttendsEvent (
                                     DEFAULT 'dalyvis',
 
     CONSTRAINT FK_Person_AttendsEvent_PersonId 
-        FOREIGN KEY (PersonId) REFERENCES AF.Person(Id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (PersonId) REFERENCES AF.Person(Id) ON DELETE CASCADE ON UPDATE SET NULL,
     CONSTRAINT FK_Event_AttendsEvent_EventId 
-        FOREIGN KEY (EventId) REFERENCES AF.Event(Id) ON DELETE RESTRICT ON UPDATE RESTRICT
+        FOREIGN KEY (EventId) REFERENCES AF.Event(Id) ON DELETE CASCADE ON UPDATE SET NULL
 );
 
 CREATE TABLE AF.Pledge (

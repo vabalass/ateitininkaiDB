@@ -95,7 +95,8 @@
         </div>
     </div>
     <div class="col-md-12 p-2">
-        <button type="submit" class="btn btn-primary m-2">Išsaugoti</button>
-        <a asp-page="/People/People" class="btn btn-danger m-2">Atšaukti</a>
+        <button type="submit" asp-page-handler="UpdatePerson" class=" btn btn-primary m-2">Išsaugoti</button>
+        <a asp-page="/People/People" class="btn btn-danger m-2">Atšaukti ir grįžti</a>
+        <button type="submit" asp-page-handler="DeletePerson" class="btn btn-warning m-2">Ištrinti žmogų</button>
     </div>
 </form>

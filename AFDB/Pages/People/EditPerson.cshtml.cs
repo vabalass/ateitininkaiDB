@@ -25,7 +25,7 @@ namespace AFDB.Pages.People
             _pledgeRepository = pledgeRepository;
             PledgeDates = new DateOnly[4];
         }
-        public ActionResult OnPost()
+        public ActionResult OnPostUpdatePerson()
         {
             for (int i = 0; i < 4; ++i)
             {
@@ -60,11 +60,23 @@ namespace AFDB.Pages.People
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
                 ModelState.AddModelError(string.Empty, ex.Message);
                 return Page();
             }
             
+            return RedirectToPage("/People/People");
+        }
+        public ActionResult OnPostDeletePerson()
+        {
+            try
+            {
+                _peopleRepository.DeletePerson(Person.Id);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
             return RedirectToPage("/People/People");
         }
         public void OnGet(int id)

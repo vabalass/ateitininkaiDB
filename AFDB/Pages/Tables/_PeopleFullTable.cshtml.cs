@@ -23,22 +23,6 @@ namespace AFDB.Pages.Tables
             }
             _peopleRepository = peopleRepository;
         }
-        public void OnPostDeletePerson()
-        {
-            /*
-            Console.WriteLine($"Deleting person with ID: {personId}");
-            try
-            {
-                _peopleRepository.DeletePerson(personId);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.InnerException.Message);
-            }
-            return RedirectToPage();
-            */
-            Console.WriteLine("Pasiekta.");
-        }
         public void OnGet()
         {
         }

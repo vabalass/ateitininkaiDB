@@ -38,8 +38,7 @@ namespace AFDB.Pages.People
                     }
                     catch (Exception ex)
                     {
-                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
-                        return Page();
+                        ModelState.AddModelError(string.Empty, ex.Message);
                     }
                     return RedirectToPage("/People/People");
                 }

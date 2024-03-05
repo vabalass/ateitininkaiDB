@@ -11,8 +11,10 @@ builder.Services.AddRazorPages();
 
 //Configure PostgreSQL connection
 builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AteitisDbContext"))
-    );
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AteitisDbContext"));
+});
+
 
 // Add services to the container.
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();

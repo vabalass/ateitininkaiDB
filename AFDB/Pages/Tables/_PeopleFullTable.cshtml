@@ -36,9 +36,8 @@
             <td>@Html.DisplayFor(modelItem => u.Address)</td>
             <td>@Html.DisplayFor(modelItem => u.Registrationdate)</td>
             <td>
-                <div class="">
-                    <a type="button" class="btn btn-info btn-sm" asp-area="" asp-page="/People/EditPerson" asp-route-id="@u.Id">Redaguoti</a>
-                </div>
+                <a type="button" class="btn btn-info btn-sm" asp-area="" asp-page="/People/EditPerson" asp-route-id="@u.Id">Redaguoti</a>
+                <a type="button" class="btn btn-warning btn-sm" asp-page="/People/DeletePerson" asp-route-id="@u.Id">Ištrinti</a>
             </td>
         </tr>
         ++i;
