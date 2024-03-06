@@ -1,4 +1,5 @@
-﻿using AFDB.Interfaces;
+﻿using AFDB.Data;
+using AFDB.Interfaces;
 using AFDB.Models;
 
 namespace AFDB.Repositories

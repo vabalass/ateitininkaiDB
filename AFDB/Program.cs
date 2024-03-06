@@ -1,5 +1,5 @@
+using AFDB.Data;
 using AFDB.Interfaces;
-using AFDB.Models;
 using AFDB.Repositories;
 using AFDB.Services.CSVServices;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +15,10 @@ builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AteitisDbContext"));
 });
 
-
 // Add services to the container.
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 builder.Services.AddScoped<IPledgeRepository, PledgeRepository>();
+builder.Services.AddScoped<IMembershipFeeRepository, MembershipFeeRepository>();
 builder.Services.AddScoped<IServiceCSV, ServiceCSV>();
 
 var app = builder.Build();

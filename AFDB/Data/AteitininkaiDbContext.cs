@@ -1,6 +1,9 @@
+﻿using System;
+using System.Collections.Generic;
+using AFDB.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AFDB.Models;
+namespace AFDB.Data;
 
 public partial class AteitininkaiDbContext : DbContext
 {
@@ -23,6 +26,8 @@ public partial class AteitininkaiDbContext : DbContext
 
     public virtual DbSet<Membershipfee> Membershipfees { get; set; }
 
+    public virtual DbSet<Membershipfeefull> Membershipfeefulls { get; set; }
+
     public virtual DbSet<Person> People { get; set; }
 
     public virtual DbSet<PersonFull> PersonFulls { get; set; }
@@ -30,6 +35,10 @@ public partial class AteitininkaiDbContext : DbContext
     public virtual DbSet<Pledge> Pledges { get; set; }
 
     public virtual DbSet<Unit> Units { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql("Host=localhost;Database=AteitininkaiDB;Username=postgres;Password=zalnora");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -51,12 +60,10 @@ public partial class AteitininkaiDbContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Attendsevents)
                 .HasForeignKey(d => d.Eventid)
-                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("fk_event_attendsevent_eventid");
 
             entity.HasOne(d => d.Person).WithMany(p => p.Attendsevents)
                 .HasForeignKey(d => d.Personid)
-                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("fk_person_attendsevent_personid");
         });
 
@@ -80,12 +87,10 @@ public partial class AteitininkaiDbContext : DbContext
 
             entity.HasOne(d => d.Person).WithMany(p => p.Belongstounits)
                 .HasForeignKey(d => d.Personid)
-                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("fk_person_belongstounit_personid");
 
             entity.HasOne(d => d.Unit).WithMany(p => p.Belongstounits)
                 .HasForeignKey(d => d.Unitid)
-                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("fk_unit_belongstounit_unitid");
         });
 
@@ -172,6 +177,9 @@ public partial class AteitininkaiDbContext : DbContext
             entity.Property(e => e.Amount)
                 .HasPrecision(10, 2)
                 .HasColumnName("amount");
+            entity.Property(e => e.Description)
+                .HasMaxLength(500)
+                .HasColumnName("description");
             entity.Property(e => e.Paymentdate)
                 .HasDefaultValueSql("CURRENT_DATE")
                 .HasColumnName("paymentdate");
@@ -183,8 +191,30 @@ public partial class AteitininkaiDbContext : DbContext
 
             entity.HasOne(d => d.Person).WithMany()
                 .HasForeignKey(d => d.Personid)
-                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("fk_person_membershipfee_personid");
+        });
+
+        modelBuilder.Entity<Membershipfeefull>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("membershipfeefull", "af");
+
+            entity.Property(e => e.Amount)
+                .HasPrecision(10, 2)
+                .HasColumnName("amount");
+            entity.Property(e => e.Description)
+                .HasMaxLength(500)
+                .HasColumnName("description");
+            entity.Property(e => e.Paymentdate).HasColumnName("paymentdate");
+            entity.Property(e => e.Paymentid).HasColumnName("paymentid");
+            entity.Property(e => e.Personfirstname)
+                .HasMaxLength(32)
+                .HasColumnName("personfirstname");
+            entity.Property(e => e.Personid).HasColumnName("personid");
+            entity.Property(e => e.Personlastname)
+                .HasMaxLength(32)
+                .HasColumnName("personlastname");
         });
 
         modelBuilder.Entity<Person>(entity =>
@@ -303,13 +333,12 @@ public partial class AteitininkaiDbContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Pledges)
                 .HasForeignKey(d => d.Eventid)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("fk_event_pledge_eventid");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_pledge_eventid");
 
             entity.HasOne(d => d.Person).WithMany(p => p.Pledges)
                 .HasForeignKey(d => d.Personid)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("fk_person_pledge_personid");
+                .HasConstraintName("fk_pledge_personid");
         });
 
         modelBuilder.Entity<Unit>(entity =>

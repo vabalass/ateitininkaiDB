@@ -27,6 +27,7 @@ CREATE TABLE AF.MembershipFee (
                                     GENERATED ALWAYS AS IDENTITY,
     PersonId        INTEGER         NOT NULL,
     Amount          DECIMAL(10, 2)  NOT NULL,
+    Description     VARCHAR(500),
     PaymentDate     DATE       NOT NULL 
                                     DEFAULT CURRENT_DATE,
 
@@ -149,6 +150,20 @@ FROM
 CREATE VIEW AF.Members AS
 SELECT * FROM AF.Person_Full
 WHERE MembershipStatus IS NOT NULL;
+
+CREATE VIEW AF.MembershipFeeFull AS
+SELECT
+    mf.PaymentId,
+    mf.PersonId,
+    p.FirstName AS PersonFirstName,
+    p.LastName AS PersonLastName,
+    mf.Amount,
+    mf.PaymentDate,
+    mf.Description
+FROM
+    AF.MembershipFee mf
+JOIN
+    AF.Person p ON mf.PersonId = p.Id;
 
 -- Trigger to check if a person exists when adding them to an event or unit
 -- Trigger to check if a person exists when adding them to an event or unit

@@ -13,5 +13,7 @@ public partial class Membershipfee
 
     public DateOnly Paymentdate { get; set; }
 
+    public string? Description { get; set; }
+
     public virtual Person Person { get; set; } = null!;
 }

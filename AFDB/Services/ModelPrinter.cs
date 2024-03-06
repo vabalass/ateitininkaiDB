@@ -17,5 +17,13 @@ namespace AFDB.Services
             Console.WriteLine("Country: " + Person.Country + " " + Person.City);
             Console.WriteLine("Adress: " + Person.Street + " " + Person.House + "-" + Person.Apartment);
         }
+
+        public static void PrintMembershipFee(Membershipfee membershipfee)
+        {
+            Console.WriteLine("--------------ID: " + membershipfee.Paymentid);
+            Console.WriteLine("Person id: " + membershipfee.Personid);
+            Console.WriteLine("Suma: " + membershipfee.Amount);
+            Console.WriteLine("Mokejimo data: " + membershipfee.Paymentdate);
+        }
     }
 }
