@@ -159,7 +159,14 @@ SELECT
     p.LastName AS PersonLastName,
     mf.Amount,
     mf.PaymentDate,
-    mf.Description
+    mf.Description,
+        COALESCE((
+        SELECT I.Association
+        FROM AF.Pledge I
+        WHERE I.PersonId = p.Id
+        ORDER BY I.Date DESC
+        LIMIT 1
+    ), NULL) AS MembershipStatus
 FROM
     AF.MembershipFee mf
 JOIN

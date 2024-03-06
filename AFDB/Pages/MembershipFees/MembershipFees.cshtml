@@ -2,3 +2,18 @@
 @model AFDB.Pages.MembershipFees.MembershipFeesModel
 @{
 }
+
+@if (!ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> @Html.Raw(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).FirstOrDefault())
+    </div>
+}
+
+<div class="text-center">
+    <h2 class="display-4">Nario mokesčių sąrašas</h2>
+</div>
+
+<div class="container-fluid">
+    @await Html.PartialAsync("Tables/_MembershipFeesFullTable", new Tables._MembershipFeesFullTableModel(Model.Membershipfeesfull))
+</div>

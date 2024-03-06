@@ -24,6 +24,7 @@ namespace AFDB.Services
             Console.WriteLine("Person id: " + membershipfee.Personid);
             Console.WriteLine("Suma: " + membershipfee.Amount);
             Console.WriteLine("Mokejimo data: " + membershipfee.Paymentdate);
+            Console.WriteLine("Aprašymas" + membershipfee.Description);
         }
     }
 }

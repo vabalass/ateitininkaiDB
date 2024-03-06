@@ -10,8 +10,7 @@ namespace AFDB.Pages.Tables
     {
         [BindProperty]
         public IEnumerable<PersonFull>? _PeopleFull { get; set; }
-        private readonly IPeopleRepository _peopleRepository;
-        public _PeopleFullTableModel(IEnumerable<PersonFull> peopleFull, IPeopleRepository peopleRepository)
+        public _PeopleFullTableModel(IEnumerable<PersonFull> peopleFull)
         {
             if(peopleFull != null)
             { 
@@ -21,7 +20,6 @@ namespace AFDB.Pages.Tables
             {
                 _PeopleFull = new List<PersonFull>();
             }
-            _peopleRepository = peopleRepository;
         }
         public void OnGet()
         {

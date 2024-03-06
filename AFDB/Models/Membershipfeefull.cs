@@ -18,4 +18,6 @@ public partial class Membershipfeefull
     public DateOnly? Paymentdate { get; set; }
 
     public string? Description { get; set; }
+
+    public string? Membershipstatus { get; set; }
 }

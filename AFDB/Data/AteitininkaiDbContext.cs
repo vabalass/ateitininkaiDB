@@ -206,6 +206,9 @@ public partial class AteitininkaiDbContext : DbContext
             entity.Property(e => e.Description)
                 .HasMaxLength(500)
                 .HasColumnName("description");
+            entity.Property(e => e.Membershipstatus)
+                .HasColumnType("character varying")
+                .HasColumnName("membershipstatus");
             entity.Property(e => e.Paymentdate).HasColumnName("paymentdate");
             entity.Property(e => e.Paymentid).HasColumnName("paymentid");
             entity.Property(e => e.Personfirstname)
