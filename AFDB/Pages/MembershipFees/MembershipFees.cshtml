@@ -19,10 +19,43 @@
         <a type="button" class="btn btn-primary" asp-area="" asp-page="/MembershipFees/AddPayment">Pridėti mokėjimą</a>
     </div>
     <div class="p-2">
+        <a type="button" class="btn btn-primary" asp-area="" asp-page="/MembershipFees/AddPaymentsFromFile">Pridėti mokėjimus iš failo</a>
+    </div>
+    <div class="p-2">
         <form method="post">
             <button type="submit" asp-page-handler="DownloadFile" class="btn btn-success">Atsiųsti .csv</button>
         </form>
     </div>
+</div>
+
+<div class="cold-md-12 d-flex">
+    <form method="post" class="d-flex">
+        <div class="p-2 d-flex">
+            <label class="form-label">Paieška</label>
+            <input type="text" class="form-control ms-2" asp-for="Filter.SearchField">
+        </div>
+        <div class="p-2">
+            <label class="form-label">Sąjunga</label>
+            <select asp-for="Filter.MembershipStatus">
+                <option default></option>
+                <option>JAS</option>
+                <option>MAS</option>
+                <option>SAS</option>
+                <option>ASS</option>
+            </select>
+        </div>
+        <div class="p-2 d-flex">
+            <label class="form-label">Nuo</label>
+            <input type="date" class="form-control ms-2" asp-for="Filter.DateFrom">
+        </div>
+        <div class="p-2 d-flex">
+            <label class="form-label">Iki</label>
+            <input type="date" class="form-control ms-2" asp-for="Filter.DateTo">
+        </div>
+        <div class="p-2">
+            <button type="submit" asp-page-handler="FilterFees" class="btn btn-success">Filtruoti</button>
+        </div>
+    </form>
 </div>
 
 <div class="container-fluid">

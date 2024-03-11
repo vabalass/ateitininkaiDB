@@ -30,8 +30,7 @@
             <td>@Html.DisplayFor(modelItem => u.Paymentdate)</td>
             <td>@Html.DisplayFor(modelItem => u.Description)</td>
             <td>
-                <a type="button" class="btn btn-info btn-sm" asp-area="" asp-page="" asp-route-id="">Redaguoti</a>
-                <a type="button" class="btn btn-warning btn-sm" asp-page="" asp-route-id="">Ištrinti</a>
+                <a type="button" class="btn btn-warning btn-sm" asp-page="/MembershipFees/DeleteMembershipFee" asp-route-id="@u.Paymentid">Ištrinti</a>
             </td>
         </tr>
         ++i;

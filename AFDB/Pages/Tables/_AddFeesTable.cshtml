@@ -1,0 +1,31 @@
+﻿@model AFDB.Pages.Tables._AddFeesTableModel
+@{
+    int i = 1;
+}
+<table class="table table-sm table-hover table-striped">
+        <tr>
+            <th>#</th>
+            <th>Asmens Id</th>
+            <th>Vardas</th>
+            <th>Pavardė</th>
+            <th>Narystė</th>
+            <th>Suma</th>
+            <th>Pavedimo data</th>
+            <th>Aprašymas</th>
+        </tr>
+        @foreach (var u in Model._Fees)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td>@Html.DisplayFor(modelItem => u.Personid)</td>
+                <td>@Html.DisplayFor(modelItem => u.Personfirstname)</td>
+                <td>@Html.DisplayFor(modelItem => u.Personlastname)</td>
+                <td>@Html.DisplayFor(modelItem => u.Membershipstatus)</td>
+                <td>@Html.DisplayFor(modelItem => u.Amount)</td>
+                <td>@Html.DisplayFor(modelItem => u.Paymentdate)</td>
+                <td>@Html.DisplayFor(modelItem => u.Description)</td>
+
+            </tr>
+            ++i;
+        }
+    </table>

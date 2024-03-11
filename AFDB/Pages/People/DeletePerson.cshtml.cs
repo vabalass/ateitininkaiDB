@@ -14,7 +14,6 @@ namespace AFDB.Pages.People
         }
         public IActionResult OnGet(int id)
         {
-            Console.WriteLine("esu");
             try
             {
                 _peopleRepository.DeletePerson(id);

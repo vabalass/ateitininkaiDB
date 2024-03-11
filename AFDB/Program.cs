@@ -12,7 +12,7 @@ builder.Services.AddRazorPages();
 //Configure PostgreSQL connection
 builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AteitisDbContext"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AzureAFDB"));
 });
 
 // Add services to the container.
@@ -20,6 +20,7 @@ builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 builder.Services.AddScoped<IPledgeRepository, PledgeRepository>();
 builder.Services.AddScoped<IMembershipFeeRepository, MembershipFeeRepository>();
 builder.Services.AddScoped<IServiceCSV, ServiceCSV>();
+builder.Services.AddScoped<IMembershipFeesServiceCSV, MembershipFeesServiceCSV>();
 
 var app = builder.Build();
 

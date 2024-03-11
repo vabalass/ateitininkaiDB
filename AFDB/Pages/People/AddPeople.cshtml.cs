@@ -56,13 +56,21 @@ namespace AFDB.Pages.People
 
         public IActionResult OnPostReadFile()
         {
-            if(CsvFile != null)
+            try
             {
-                People = _serviceCSV.ReadPeopleCSV(CsvFile.OpenReadStream(), false);
-            }
+                if(CsvFile != null)
+                {
+                    People = _serviceCSV.ReadPeopleCSV(CsvFile.OpenReadStream(), false);
+                }
 
-            PeopleStorage.SetPeople(People);
-            return Page();
+                PeopleStorage.SetPeople(People);
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
         }
 
         public void OnGet()

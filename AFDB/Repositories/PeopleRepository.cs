@@ -122,5 +122,42 @@ namespace AFDB.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public IEnumerable<Membershipfeefull> SearchForPeopleWithFee(IEnumerable<Membershipfeefull> fees)
+        {
+            foreach (var fee in fees)
+            {
+                // Search for people using the provided information
+                PersonFull? matchingPerson = SearchPeople(fee.Personfirstname, fee.Personlastname);
+
+                if (matchingPerson != null)
+                {
+                    fee.Personid = matchingPerson.Id;
+                }
+            }
+
+            return fees;
+        }
+
+        public PersonFull? SearchPeople(string firstName, string lastName)
+        {
+            var people = _context.PersonFulls
+                .Where(p => p.Firstname == firstName && p.Lastname == lastName)
+                .OrderByDescending(p => p.Registrationdate)
+                .ToList();
+
+            if (people.Count == 1)
+            {
+                return people[0];
+            }
+            else if(people.Count > 1)
+            {
+                return people.FirstOrDefault();
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

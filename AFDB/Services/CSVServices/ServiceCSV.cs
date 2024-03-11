@@ -3,7 +3,6 @@ using AFDB.Models;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Globalization;
 using System.Text;
 
@@ -74,21 +73,6 @@ namespace AFDB.Services.CSVServices
             }
         }
 
-        public sealed class MembershipFeeFullCsvMap : ClassMap<Membershipfeefull>
-        {
-            public MembershipFeeFullCsvMap()
-            {
-                Map(m => m.Paymentid).Name("Id");
-                Map(m => m.Personid).Name("Asmens Id");
-                Map(m => m.Personfirstname).Name("Vardas");
-                Map(m => m.Personlastname).Name("Pavardė");
-                Map(m => m.Membershipstatus).Name("Narystė");
-                Map(m => m.Amount).Name("Suma");
-                Map(m => m.Paymentdate).Name("Pavedimo data");
-                Map(m => m.Description).Name("Aprašymas");
-            }
-        }
-
         public IActionResult DownloadPeopleFullCSV(IEnumerable<PersonFull> people)
         {
             using (MemoryStream memoryStream = new MemoryStream())
@@ -107,26 +91,6 @@ namespace AFDB.Services.CSVServices
                 };
             }
         }
-
-        public IActionResult DownloadMemvershipFeesFullCSV(IEnumerable<Membershipfeefull> fees)
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(memoryStream, Encoding.UTF8))
-            using (CsvWriter csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
-            {
-                csv.Context.RegisterClassMap(new MembershipFeeFullCsvMap());
-                csv.WriteRecords(fees);
-                writer.Flush();
-
-                memoryStream.Seek(0, SeekOrigin.Begin);
-
-                return new FileContentResult(memoryStream.ToArray(), "text/csv")
-                {
-                    FileDownloadName = $"AF_Nario_mokesciai_{DateTime.Now:yyyyMMddHHmmss}.csv"
-                };
-            }
-        }
-
         //content type true - with creation date and person ID, false - without.
         public IActionResult DownloadPeopleCSV(IEnumerable<Person> people, bool contentType)
         {

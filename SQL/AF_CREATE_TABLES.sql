@@ -153,7 +153,7 @@ WHERE MembershipStatus IS NOT NULL;
 
 CREATE VIEW AF.MembershipFeeFull AS
 SELECT
-    mf.PaymentId,
+    mf.Id AS PaymentId,
     mf.PersonId,
     p.FirstName AS PersonFirstName,
     p.LastName AS PersonLastName,

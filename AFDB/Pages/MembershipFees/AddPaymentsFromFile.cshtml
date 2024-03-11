@@ -1,0 +1,44 @@
+﻿@page
+@model AFDB.Pages.MembershipFees.AddPaymentsFromFileModel
+@{
+}
+
+@if (!ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> @Html.Raw(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).FirstOrDefault())
+    </div>
+}
+
+<h1>Nario mokesčių iš failo</h1>
+
+<div class="col-md-12 d-flex flex-wrap justify-content-start ">
+    <div class="col-md-8">
+        <div class="p-2">
+            <form method="post" enctype="multipart/form-data">
+                <input class="custom-file-input" asp-for="CsvFile" required>
+                <button type="submit" asp-page-handler="ReadFile" class="btn btn-primary">Perskaityti failą ir patikrinti asmenų egzistavimą</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-4 d-flex flex-wrap justify-content-end">
+        <div class="p-2">
+            <form method="post">
+                <button type="submit" asp-page-handler="DownloadExample" class="btn btn-success">Atsiųsti šabloną .csv</button>
+            </form>
+        </div>
+        <div class="p-2">
+            <a asp-page="/MembershipFees/MembershipFees" class="btn btn-danger">Grįžti</a>
+        </div>
+    </div>
+</div>
+
+<div>
+    @await Html.PartialAsync("Tables/_AddFeesTable", new Tables._AddFeesTableModel(Model.Fees))
+</div>
+
+<div class="p-2">
+    <form method="post">
+        <button type="submit" asp-page-handler="AddFeesToDB" class="btn btn-primary">Pridėti mokėjimus į duomenų bazę</button>
+    </form>
+</div>

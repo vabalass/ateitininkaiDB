@@ -12,5 +12,7 @@ namespace AFDB.Interfaces
         void UpdatePerson(Person Person);
         void DeletePerson(int personId);
         Task DeletePersonAsync(int personId);
+        IEnumerable<Membershipfeefull> SearchForPeopleWithFee(IEnumerable<Membershipfeefull> fees);
+        PersonFull? SearchPeople(string firstName, string lastName);
     }
 }
