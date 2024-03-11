@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ateitiesDB", "ateitiesDB.csproj", "{7EA7128A-7CB7-44F8-90BE-DEF266428A57}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AFDB", "..\AFDB\AFDB.csproj", "{271A414F-3E86-4D52-8906-036CD5564A14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "afdb", "..\AFDB\afdb.csproj", "{271A414F-3E86-4D52-8906-036CD5564A14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
