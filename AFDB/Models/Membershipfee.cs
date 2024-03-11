@@ -5,7 +5,7 @@ namespace AFDB.Models;
 
 public partial class Membershipfee
 {
-    public int Paymentid { get; set; }
+    public int Id { get; set; }
 
     public int Personid { get; set; }
 

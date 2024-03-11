@@ -23,7 +23,7 @@ CREATE TABLE AF.Person (
 );
 
 CREATE TABLE AF.MembershipFee (
-    PaymentId       INTEGER         NOT NULL 
+    Id       INTEGER         NOT NULL PRIMARY KEY 
                                     GENERATED ALWAYS AS IDENTITY,
     PersonId        INTEGER         NOT NULL,
     Amount          DECIMAL(10, 2)  NOT NULL,

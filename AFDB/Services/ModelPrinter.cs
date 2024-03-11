@@ -20,7 +20,7 @@ namespace AFDB.Services
 
         public static void PrintMembershipFee(Membershipfee membershipfee)
         {
-            Console.WriteLine("--------------ID: " + membershipfee.Paymentid);
+            Console.WriteLine("------------ID: " + membershipfee.Id);
             Console.WriteLine("Person id: " + membershipfee.Personid);
             Console.WriteLine("Suma: " + membershipfee.Amount);
             Console.WriteLine("Mokejimo data: " + membershipfee.Paymentdate);

@@ -6,8 +6,8 @@ namespace AFDB.Repositories
 {
     public class MembershipFeeRepository : IMembershipFeeRepository
     {
-        private readonly AteitininkaiDbContext _context;
-        public MembershipFeeRepository(AteitininkaiDbContext context)
+        private readonly Data.AteitininkaiDbContext _context;
+        public MembershipFeeRepository(Data.AteitininkaiDbContext context)
         {
             _context = context;
         }

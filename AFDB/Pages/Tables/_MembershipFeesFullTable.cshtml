@@ -12,6 +12,7 @@
         <th>Pavardė</th>
         <th>Narystė</th>
         <th>Suma</th>
+        <th>Pavedimo data</th>
         <th>Aprašymas</th>
         <th>Veiksmai</th>
 
@@ -26,6 +27,7 @@
             <td>@Html.DisplayFor(modelItem => u.Personlastname)</td>
             <td>@Html.DisplayFor(modelItem => u.Membershipstatus)</td>
             <td>@Html.DisplayFor(modelItem => u.Amount)</td>
+            <td>@Html.DisplayFor(modelItem => u.Paymentdate)</td>
             <td>@Html.DisplayFor(modelItem => u.Description)</td>
             <td>
                 <a type="button" class="btn btn-info btn-sm" asp-area="" asp-page="" asp-route-id="">Redaguoti</a>

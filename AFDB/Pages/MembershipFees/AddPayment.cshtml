@@ -1,0 +1,66 @@
+﻿@page
+@model AFDB.Pages.MembershipFees.AddPaymentModel
+@{
+}
+@if (!ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> @Html.Raw(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).FirstOrDefault())
+    </div>
+}
+
+<h1>Mokesčio pridėjimas</h1>
+
+<form class="cold-md-12 d-flex flex-wrap needs-validation" method="post">
+    <div class="p-2 col-md-4">
+        <div>
+            <label class="form-label">Narys</label>
+            <select id="personDropdown" class="form-select" asp-for="Fee.Personid" required>
+                @foreach (var person in Model.People)
+                {
+                    <option value="@person.Id">@($"{person.Firstname} {person.Lastname} {person.Birthdate}")</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label class="form-label">Suma</label>
+            <input type="text" class="form-control" pattern="\d+(\.\d{1,2})?" required asp-for="Fee.Amount" />
+        </div>
+        <div>
+            <label class="form-label">Pavedimo data</label>
+            <input type="date" class="form-control" value="today" asp-for="Fee.Paymentdate" />
+        </div>
+        <div>
+            <label class="form-label">Aprašymas</label>
+            <textarea class="form-control" rows="3" maxlength="300" asp-for="Fee.Description"></textarea>
+        </div>
+        <div class="col-md-12 p-2">
+            <button type="submit" class="btn btn-primary m-2">Išsaugoti</button>
+            <a asp-page="/MembershipFees/MembershipFees" class="btn btn-danger m-2">Atšaukti</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel = "stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#personDropdown').select2({
+                placeholder: 'Pasirinkite asmenį',
+                allowClear: true,
+            });
+
+            // Optional: If you want to filter while typing in the text input
+            $('#personSearch').on('input', function () {
+                var searchTerm = $(this).val();
+                $('#personDropdown option').each(function () {
+                    var text = $(this).text();
+                    var match = text.toUpperCase().includes(searchTerm.toUpperCase());
+                    $(this).toggle(match);
+                });
+            });
+        });
+    </script>
+}

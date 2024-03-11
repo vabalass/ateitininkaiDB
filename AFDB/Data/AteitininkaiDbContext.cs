@@ -36,10 +36,6 @@ public partial class AteitininkaiDbContext : DbContext
 
     public virtual DbSet<Unit> Units { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=AteitininkaiDB;Username=postgres;Password=zalnora");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Attendsevent>(entity =>
@@ -168,12 +164,15 @@ public partial class AteitininkaiDbContext : DbContext
 
         modelBuilder.Entity<Membershipfee>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("membershipfee", "af");
+            entity.HasKey(e => e.Id).HasName("pk_membershipfee");
+
+            entity.ToTable("membershipfee", "af");
 
             entity.HasIndex(e => e.Paymentdate, "idx_membershipfee_paymentdate");
 
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
             entity.Property(e => e.Amount)
                 .HasPrecision(10, 2)
                 .HasColumnName("amount");
@@ -183,13 +182,9 @@ public partial class AteitininkaiDbContext : DbContext
             entity.Property(e => e.Paymentdate)
                 .HasDefaultValueSql("CURRENT_DATE")
                 .HasColumnName("paymentdate");
-            entity.Property(e => e.Paymentid)
-                .ValueGeneratedOnAdd()
-                .UseIdentityAlwaysColumn()
-                .HasColumnName("paymentid");
             entity.Property(e => e.Personid).HasColumnName("personid");
 
-            entity.HasOne(d => d.Person).WithMany()
+            entity.HasOne(d => d.Person).WithMany(p => p.Membershipfees)
                 .HasForeignKey(d => d.Personid)
                 .HasConstraintName("fk_person_membershipfee_personid");
         });

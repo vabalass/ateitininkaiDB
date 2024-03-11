@@ -37,5 +37,7 @@ public partial class Person
 
     public virtual ICollection<Belongstounit> Belongstounits { get; set; } = new List<Belongstounit>();
 
+    public virtual ICollection<Membershipfee> Membershipfees { get; set; } = new List<Membershipfee>();
+
     public virtual ICollection<Pledge> Pledges { get; set; } = new List<Pledge>();
 }
