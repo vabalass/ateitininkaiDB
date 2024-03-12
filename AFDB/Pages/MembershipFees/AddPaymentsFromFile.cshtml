@@ -33,6 +33,11 @@
     </div>
 </div>
 
+<p>
+    *Jei eilutėje yra Asmens Id, reiškia žmogus su tokiu vardu ir pavarde buvo surastas duomenų bazėje ir paspaudus, apmokėjimas bus pridėtas. 
+    Eilutės, kuriose nėra Asmens Id bus praignoruotos.
+</p>
+
 <div>
     @await Html.PartialAsync("Tables/_AddFeesTable", new Tables._AddFeesTableModel(Model.Fees))
 </div>

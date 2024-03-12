@@ -12,7 +12,7 @@ builder.Services.AddRazorPages();
 //Configure PostgreSQL connection
 builder.Services.AddDbContext<AteitininkaiDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AzureAFDB"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING"));
 });
 
 // Add services to the container.

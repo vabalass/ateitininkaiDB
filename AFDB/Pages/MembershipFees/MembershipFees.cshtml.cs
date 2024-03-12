@@ -23,11 +23,19 @@ namespace AFDB.Pages.MembershipFees
             _serviceCSV = serviceCSV;
             _membershipFeeSimpleService = new MembershipFeeSimpleService();
             Membershipfeesfull = _membershipFeeRepository.GetAllMembershipFeesFull();
+            Filter = new SearchFilters();
         }
         public ActionResult OnPostDownloadFile()
         {
             var filteredFees = MembershipFeesStorage.GetMembershipFees();
-            return (ActionResult)_serviceCSV.DownloadMemvershipFeesFullCSV(filteredFees);
+            if(filteredFees != null)
+            {
+                return (ActionResult)_serviceCSV.DownloadMemvershipFeesFullCSV(filteredFees);
+            }
+            else
+            {
+                return (ActionResult)_serviceCSV.DownloadMemvershipFeesFullCSV(Membershipfeesfull);
+            }
         }
         public void OnPostFilterFees()
         {

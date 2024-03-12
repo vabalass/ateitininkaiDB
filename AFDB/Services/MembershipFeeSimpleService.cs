@@ -41,11 +41,6 @@ namespace AFDB.Services
                 return fees;
             }
 
-            if (searchFilters.DateFrom == default && searchFilters.DateTo == default)
-            {
-                return fees; // No date range selected, return the original list
-            }
-
             return fees.Where(fee =>
                 (string.IsNullOrEmpty(searchFilters.SearchField) ||
                     fee.Personfirstname?.Contains(searchFilters.SearchField, StringComparison.OrdinalIgnoreCase) == true ||
