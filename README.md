@@ -1,6 +1,6 @@
 # ateitininkaiDB
 
-I am creating database for Ateitininkai federation.
+I have created a database for Ateitininkai federation.
 
 ## DB logic model
 ![](AF_duomenų_bazė_loginis_modelis.png)
